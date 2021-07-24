@@ -7,7 +7,7 @@ SRC = \
 INCLUDE_DIR = ./
 
 CC = clang++
-FLAG = -Wall -Wextra -Werror -I $(INCLUDE_DIR)
+FLAG = -Wall -Wextra -Werror -std=c++98 -I $(INCLUDE_DIR)
 RM = rm -f
 
 OBJ = $(SRC:.cpp=.o)

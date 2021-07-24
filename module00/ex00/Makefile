@@ -4,7 +4,7 @@ NAME = megaphone
 SRC = megaphone.cpp
 
 CC = clang++
-FLAG = -Wall -Wextra -Werror
+FLAG = -Wall -Wextra -Werror -std=c++98
 RM = rm -f
 
 OBJ = $(SRC:.cpp=.o)
