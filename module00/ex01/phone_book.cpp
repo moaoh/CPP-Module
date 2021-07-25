@@ -54,6 +54,15 @@ void				SEARCH(phone_book (&phone_book)[8], int count, int search_check)
 	}
 }
 
+void	line_eof(void)
+{
+	if(std::cin.eof())
+	{
+		std::cout << "\ngood bye :D" << "\n";
+		exit(1);
+	}
+}
+
 int					main(void)
 {
 	std::string		input;
@@ -66,6 +75,7 @@ int					main(void)
 	{
 		std::cout << "📖 : ";
 		std::getline(std::cin, input);
+		line_eof();
 		if (input == "EXIT")
 			break ;
 		else if (input == "ADD")
