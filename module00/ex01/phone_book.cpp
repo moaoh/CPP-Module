@@ -2,12 +2,13 @@
 
 void				explanation(void)
 {
-	std::cout << "you should accept the ADD command, the SEARCH command or the EXIT command." << "\n";
+	std::cout << "📖 phone_book 📖" << "\n";
 	std::cout << "EXIT : program quits." << "\n";
 	std::cout << "ADD : new contact’s information." << "\n";
 	std::cout << "SEARCH : look at the phone_book." << "\n";
 }
 
+// & 를 유동적으로 받을 수는 없을까..?
 void				search_contact(phone_book (&phone_book)[8], int count)
 {
 	std::string	index;
@@ -50,7 +51,6 @@ void				SEARCH(phone_book (&phone_book)[8], int count, int search_check)
 		}
 		std::cout << "--------------------------------------------" << "\n";
 		search_contact(phone_book, count);
-		// Wrong index., Undefined Command.
 	}
 }
 
@@ -64,7 +64,7 @@ int					main(void)
 	explanation();
 	while (true)
 	{
-		std::cout << "📖 phone_book : ";
+		std::cout << "📖 : ";
 		std::getline(std::cin, input);
 		if (input == "EXIT")
 			break ;
@@ -80,7 +80,7 @@ int					main(void)
 			SEARCH(phone_book, count, search_check);
 		else
 		{
-			std::cout << "Invalid input value. 🥲 (EXIT, ADD, SEARCH)" << "\n";
+			std::cout << "Invalid input value. 🥲  (EXIT, ADD, SEARCH)" << "\n";
 		}
 		if (count >= 8)
 			count = 0;

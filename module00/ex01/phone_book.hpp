@@ -38,8 +38,6 @@ class phone_book
 			getline(std::cin, temp);
 			darkest_secret = temp;
 		}
-		// [  10보다  ]|[  작은      ]|[   출력     ]|[          ]
-		// index, first name, last name and nickname
  		
 		void	blank_space(int num)
 		{
@@ -61,6 +59,7 @@ class phone_book
 			}
 		}
 
+		// index, first name, last name and nickname
 		void	SEARCH(void)
 		{
 			blank_space(first_name.length());
@@ -87,6 +86,6 @@ class phone_book
 		}
 };
 
-// class ==============================
+// ====================================
 
 #endif

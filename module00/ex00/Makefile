@@ -23,7 +23,7 @@ all : $(NAME)
 
 $(NAME) : $(OBJ)
 	@$(CC) $(FLAG) -o $(NAME) $(OBJ)
-	@printf "$(CL_L_MAGENTA)🥳 Create megaphone 🥳\n"
+	@printf "$(CL_L_MAGENTA)🥳 Create $(NAME) 🥳\n"
 
 %.o : %.cpp
 	@$(CC) $(FLAG) -c $< -o $@
@@ -34,6 +34,6 @@ clean :
 
 fclean : clean
 	@$(RM) $(NAME)
-	@printf "$(CL_RED)💀 Erase $(CL_L_YELLOW)megaphone\n"
+	@printf "$(CL_RED)💀 Erase $(CL_L_YELLOW)$(NAME)\n"
 
 re : fclean all
