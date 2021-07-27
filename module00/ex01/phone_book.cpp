@@ -1,100 +1,68 @@
 #include "phone_book.hpp"
 
-void				explanation(void)
+void	phone_book::ADD(void)
 {
-	std::cout << "📖 phone_book 📖" << "\n";
-	std::cout << "EXIT : program quits." << "\n";
-	std::cout << "ADD : new contact’s information." << "\n";
-	std::cout << "SEARCH : look at the phone_book." << "\n";
+	std::string	temp;
+
+	std::cout << "first_name : ";
+	getline(std::cin, temp);
+	first_name = temp;
+	std::cout << "last_name : ";
+	getline(std::cin, temp);
+	last_name = temp;
+	std::cout << "nickname : ";
+	getline(std::cin, temp);
+	nickname = temp;
+	std::cout << "phone_number : ";
+	getline(std::cin, temp);
+	phone_number = temp;
+	std::cout << "darkest_secret : ";
+	getline(std::cin, temp);
+	darkest_secret = temp;
 }
 
-// & 를 유동적으로 받을 수는 없을까..?
-void				search_contact(phone_book (&phone_book)[8], int count)
+void	phone_book::blank_space(int num)
 {
-	std::string	index;
+	int count = 10 - num;
 
-	while (true)
-	{
-		std::cout << "Enter index to get full page (EXIT) : ";
-		getline(std::cin, index);
-		if (index == "EXIT")
-		{
-			std::cout << ":D" << "\n";
-			break ;
-		}
-		else if (("0" <= index && index <= "9") || index <= "0")
-		{
-			if (index <= "0" || index > std::to_string(count))
-				std::cout << "Index range is too large. [MAX : " << count << "]" << "\n";
-			else
-				phone_book[std::stoi(index) - 1].cout_contact();
-		}
-		else
-			std::cout << "Undefined Command." << "\n";
-	}
+	for(int i = 0; i < count; i++)
+		std::cout << " ";	
 }
 
-void				SEARCH(phone_book (&phone_book)[8], int count, int search_check)
+void	phone_book::cout_search(std::string& str)
 {
-	if (search_check)
-		count = 8;
-	if (count == 0)
-		std::cout << "There is no data. " << "\n";
+	if (str.length() < 10)
+		std::cout << str << "|";
 	else
 	{
-		std::cout << "--------------------------------------------" << "\n";
-		std::cout << "     index|first name| last name|  nickname|" << "\n";
-		for (int i = 0; i < count; i++)
-		{
-			std::cout << "         " << i + 1 << "|";
-			phone_book[i].SEARCH();
-		}
-		std::cout << "--------------------------------------------" << "\n";
-		search_contact(phone_book, count);
+		for (int i = 0; i < 9; i++)
+			std::cout << str[i];
+		std::cout << "." << "|";
 	}
 }
 
-void	line_eof(void)
+// index, first name, last name and nickname
+void	phone_book::SEARCH(void)
 {
-	if(std::cin.eof())
-	{
-		std::cout << "\ngood bye :D" << "\n";
-		exit(1);
-	}
+	blank_space(first_name.length());
+	cout_search(first_name);
+	blank_space(last_name.length());
+	cout_search(last_name);
+	blank_space(nickname.length());
+	cout_search(nickname);
+	std::cout << "\n";
 }
 
-int					main(void)
+void	phone_book::cout_contact(void)
 {
-	std::string		input;
-	phone_book		phone_book[8];
-	int				count = 0;
-	int				search_check = 0;
-
-	explanation();
-	while (true)
-	{
-		std::cout << "📖 : ";
-		std::getline(std::cin, input);
-		line_eof();
-		if (input == "EXIT")
-			break ;
-		else if (input == "ADD")
-		{
-			phone_book[count].ADD();
-			std::cout << "It's been saved in number " << count + 1 << "\n";
-			count++;
-			if (count >= 8)
-				search_check = 1;
-		}
-		else if (input == "SEARCH")
-			SEARCH(phone_book, count, search_check);
-		else
-		{
-			std::cout << "Invalid input value. 🥲  (EXIT, ADD, SEARCH)" << "\n";
-		}
-		if (count >= 8)
-			count = 0;
-	}
-	std::cout << "good bye :D" << "\n";
-	return (0);
+	std::cout << "first_name : ";
+	std::cout << first_name << "\n";
+	std::cout << "last_name : ";
+	std::cout << last_name << "\n";
+	std::cout << "nickname : ";
+	std::cout << nickname << "\n";
+	std::cout << "phone_number : ";
+	std::cout << phone_number << "\n";
+	std::cout << "darkest_secret : ";
+	std::cout << darkest_secret << "\n";
 }

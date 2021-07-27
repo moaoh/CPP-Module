@@ -2,6 +2,7 @@
 NAME = PhoneBook
 
 SRC = \
+	main.cpp \
 	phone_book.cpp \
 
 INCLUDE_DIR = ./

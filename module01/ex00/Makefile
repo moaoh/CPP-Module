@@ -3,6 +3,9 @@ NAME = Zombie
 
 SRC = \
 	main.cpp \
+	Zombie.cpp \
+	newZombie.cpp \
+	randomChump.cpp \
 
 INCLUDE_DIR = ./
 
