@@ -20,3 +20,8 @@ void Zombie::announce(void)
 {
 	std::cout << "🧟 " << "\e[1m" + Name + "\e[0m" << " \e[32mBraiiiiiiinnnzzzZ...\033[0m" << "\n";
 }
+
+void Zombie::cin_name(std::string name)
+{
+	Name = name;
+}
