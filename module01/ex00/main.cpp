@@ -7,12 +7,11 @@ int	main(void)
 
 	sujo_zombie->announce();
 	seongele_zombie->announce();
-	
+
 	randomChump("jiychoi");
 	randomChump("jaewpark");
 
 	delete sujo_zombie;
 	delete seongele_zombie;
-
 	return (0);
 }
