@@ -21,6 +21,8 @@ CL_RED = \e[31m
 CL_L_YELLOW = \e[93m
 CL_L_BLUE = \e[94m
 CL_L_MAGENTA = \e[95m
+CL_BOLD = \e[1m
+CL_RESET = \e[0m
 
 # ===============================================
 
@@ -28,7 +30,7 @@ all : $(NAME)
 
 $(NAME) : $(OBJ)
 	@$(CC) $(FLAG) -o $(NAME) $(OBJ)
-	@printf "$(CL_L_MAGENTA)🥳 Create $(NAME) 🥳\n"
+	@printf "$(CL_L_MAGENTA)🥳 Create$(CL_RESET) $(CL_BOLD)$(NAME) 🥳\n"
 
 %.o : %.cpp
 	@$(CC) $(FLAG) -c $< -o $@

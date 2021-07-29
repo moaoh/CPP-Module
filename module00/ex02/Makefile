@@ -1,11 +1,8 @@
 
-NAME = Zombie
+NAME = Account
 
 SRC = \
-	main.cpp \
-	Zombie.cpp \
-	newZombie.cpp \
-	randomChump.cpp \
+	Account.cpp \
 
 INCLUDE_DIR = ./
 

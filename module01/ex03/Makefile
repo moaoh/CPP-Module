@@ -1,16 +1,14 @@
 
-NAME = Zombie
+NAME = Unnecessary_violence
 
 SRC = \
 	main.cpp \
-	Zombie.cpp \
-	newZombie.cpp \
-	randomChump.cpp \
-
-INCLUDE_DIR = ./
+	Weapon.cpp \
+	HumanA.cpp \
+	HumanB.cpp
 
 CC = clang++
-FLAG = -Wall -Wextra -Werror -std=c++98 -I $(INCLUDE_DIR)
+FLAG = -Wall -Wextra -Werror -std=c++98
 RM = rm -f
 
 OBJ = $(SRC:.cpp=.o)
