@@ -1,17 +1,16 @@
 
-NAME = Unnecessary_violence
+NAME = replace
 
 SRC = \
 	main.cpp \
-	Weapon.cpp \
-	HumanA.cpp \
-	HumanB.cpp
+	replace.cpp \
 
 INCLUDE_DIR = ./
 
 CC = clang++
-FLAG = -Wall -Wextra -Werror -std=c++98 -I $(INCLUDE_DIR)
 RM = rm -f
+FLAG = -Wall -Wextra -std=c++98 -I $(INCLUDE_DIR)
+#FLAG = -Wall -Wextra -Werror -std=c++98 -I $(INCLUDE_DIR)
 
 OBJ = $(SRC:.cpp=.o)
 
