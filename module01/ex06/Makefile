@@ -1,9 +1,9 @@
 
-NAME = replace
+NAME = karenFilter
 
 SRC = \
 	main.cpp \
-	replace.cpp \
+	Karen.cpp \
 
 INCLUDE_DIR = ./
 

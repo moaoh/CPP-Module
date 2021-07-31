@@ -12,8 +12,7 @@ Karen::~Karen()
 
 void	Karen::debug()
 {
-	std::cout << "I love to get extra bacon for my 7XL-double-cheese-triple-pickle-special-ketchup burger." << "\n" << \
-				"I just love it!" << "\n";
+	std::cout << "I love to get extra bacon for my 7XL-double-cheese-triple-pickle-special-ketchup burger. I just love it!" << "\n";
 }
 
 void	Karen::info()
@@ -33,7 +32,7 @@ void	Karen::error()
 	std::cout << "This is unacceptable, I want to speak to the manager now." << "\n";
 }
 
-void	Karen::complain( std::string level )
+void	Karen::karenFilter( std::string level )
 {
 	std::string	levels[4] = {
 		"DEBUG",
@@ -42,8 +41,7 @@ void	Karen::complain( std::string level )
 		"ERROR",
 	};
 
-	// 이러한 형식을 사용해서 배열안에 넣을 수 있음.
-	void	(Karen::*action[4]) (void) = {
+	void (Karen::*actions[4]) () = {
 		&Karen::debug,
 		&Karen::info,
 		&Karen::warning,
@@ -54,8 +52,14 @@ void	Karen::complain( std::string level )
 	{
 		if (levels[i] == level)
 		{
-			(this->*action[i])();
+			for (int j = i; j < 4; j++)
+			{
+				std::cout << "[ " + levels[j] + " ]" << "\n";
+				(this->*actions[j]) ();
+				std::cout << "\n";
+			}
 			return ;
 		}
 	}
+	std::cout << "[ Probably complaining about insignificant problems ]" << "\n";
 }
