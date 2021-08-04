@@ -1,9 +1,9 @@
 
-NAME = karenFilter
+NAME = a.out
 
 SRC = \
 	main.cpp \
-	 Fixed.cpp \
+	Fixed.cpp \
 
 INCLUDE_DIR = ./
 

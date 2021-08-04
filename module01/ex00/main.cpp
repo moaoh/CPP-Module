@@ -1,19 +1,25 @@
 #include "Zombie.hpp"
 
+const std::string zombies[] = {
+	"sujo",
+	"seongele",
+	"jiychoi",
+	"jaewpark",
+	"mjung",
+};
+
 int	main(void)
 {
-	Zombie* sujo_zombie = newZombie("sujo");
-	Zombie* seongele_zombie = newZombie("seongele");
+	Zombie stack_zombie = Zombie("stack");
+	Zombie* heap_zombie = newZombie("heap");
 
-	sujo_zombie->announce();
-	seongele_zombie->announce();
+	stack_zombie.announce();
+	heap_zombie->announce();
 
-	randomChump("jiychoi");
-	randomChump("jaewpark");
-	randomChump("mjung");
+	for (int i = 0; i < 42; i++)
+		randomChump(zombies[rand() % 5]);
 
-	delete sujo_zombie;
-	delete seongele_zombie;
+	delete heap_zombie;
 	
 	return (0);
 }

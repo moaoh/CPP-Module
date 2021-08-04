@@ -1,5 +1,5 @@
 
-NAME = Zombie
+NAME = BraiiiiiiinnnzzzZ
 
 SRC = \
 	main.cpp \

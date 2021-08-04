@@ -12,8 +12,7 @@ Zombie::Zombie(std::string _name)
 
 Zombie::~Zombie(void)
 {
-	std::cout << "\e[1m" + Name + "\e[0m" << "\e[92m Arrrrgg.....\e[0m" << "\n";
-	std::cout << "\e[1m" + Name + "\e[0m" << "\e[31m died 🪦\e[0m" << "\n";
+	std::cout << "\e[91m" + Name + "\e[0m" << "\e[31m died... 🪦\e[0m" << "\n";
 }
 
 void Zombie::announce(void)
