@@ -1,5 +1,14 @@
 #include "phone_book.hpp"
 
+void	line_eof(void)
+{
+	if(std::cin.eof())
+	{
+		std::cout << "\ngood bye :D" << "\n";
+		exit(1);
+	}
+}
+
 void				explanation(void)
 {
 	std::cout << "📖 phone_book 📖" << "\n";
@@ -17,6 +26,7 @@ void				search_contact(phone_book (&phone_book)[8], int count)
 	{
 		std::cout << "Enter index to get full page (EXIT) : ";
 		getline(std::cin, index);
+		line_eof();
 		if (index == "EXIT")
 		{
 			std::cout << ":D" << "\n";
@@ -51,15 +61,6 @@ void				all_search(phone_book (&phone_book)[8], int count, int search_check)
 		}
 		std::cout << "--------------------------------------------" << "\n";
 		search_contact(phone_book, count);
-	}
-}
-
-void	line_eof(void)
-{
-	if(std::cin.eof())
-	{
-		std::cout << "\ngood bye :D" << "\n";
-		exit(1);
 	}
 }
 
