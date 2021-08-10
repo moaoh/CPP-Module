@@ -9,6 +9,11 @@ int	main(void)
 	std::cin >> name;
 	std::cout << "zombie N : ";
 	std::cin >> N;
+	if (!std::cin)
+	{
+		std::cout << "error : Invalid value" << std::endl;
+		return (1);
+	}
 
 	Zombie* zombies = zombieHorde(N, name);
 	for (int i = 0; i < N; i++)
