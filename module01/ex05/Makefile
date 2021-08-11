@@ -1,5 +1,5 @@
 
-NAME = replace
+NAME = karen
 
 SRC = \
 	main.cpp \
