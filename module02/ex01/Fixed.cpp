@@ -28,16 +28,16 @@ Fixed::Fixed( const float value )
 	// this->value = value;
 }
 
-Fixed &Fixed::operator=(const Fixed &fixed)
+Fixed &Fixed::operator = (const Fixed &fixed)
 {
 	std::cout << "Assignment operator called" << std::endl;
 	this->value = fixed.value;
 	return (*this);
 }
 
-std::ostream& operator<<(std::ostream &os, const Fixed &_value)
+std::ostream& operator << (std::ostream &os, const Fixed &value)
 {
-	os << _value.toFloat();
+	os << value.toFloat();
 	return (os);
 }
 
@@ -56,13 +56,13 @@ void Fixed::setRawBits( int const raw )
 float Fixed::toFloat( void ) const
 {
 	return ((float)this->value / (1 << this->integer));
-	return (this->value);
+	// return (this->value);
 }
 
 int Fixed::toInt( void ) const
 {
 	return (this->value >> this->integer);
-	return (this->value);
+	// return (this->value);
 }
 
 Fixed::~Fixed()
