@@ -32,6 +32,7 @@ public:
 	Fixed operator / ( const Fixed &other );
 
 	Fixed operator ++ ( void );
+	Fixed operator -- ( void );
 
 	float toFloat( void ) const;
 	int toInt( void ) const;

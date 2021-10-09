@@ -62,6 +62,26 @@ bool Fixed::operator != ( const Fixed &other )
 	return (this->value != other.value);
 }
 
+Fixed Fixed::operator + ( const Fixed &other )
+{
+	Fixed::setRawBits(this->value + other.value);
+}
+
+Fixed Fixed::operator - ( const Fixed &other )
+{
+	Fixed::setRawBits(this->value - other.value);
+}
+
+Fixed Fixed::operator * ( const Fixed &other )
+{
+	Fixed::setRawBits(this->value * other.value);
+}
+
+Fixed Fixed::operator / ( const Fixed &other )
+{
+	Fixed::setRawBits(this->value / other.value);
+}
+
 
 std::ostream& operator << (std::ostream &os, const Fixed &value)
 {
