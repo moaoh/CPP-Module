@@ -17,15 +17,12 @@ Fixed::Fixed( const int value )
 {
 	std::cout << "Int constructor called" << std::endl;
 	this->value = value << this->integer;
-	// this->value = value;
 }
 
 Fixed::Fixed( const float value )
 {
 	std::cout << "Float constructor called" << std::endl;
 	this->value = (int)roundf(value * (1 << this->integer));
-	// std::cout << "float : " << this->value << std::endl;
-	// this->value = value;
 }
 
 Fixed &Fixed::operator = (const Fixed &fixed)
@@ -56,13 +53,11 @@ void Fixed::setRawBits( int const raw )
 float Fixed::toFloat( void ) const
 {
 	return ((float)this->value / (1 << this->integer));
-	// return (this->value);
 }
 
 int Fixed::toInt( void ) const
 {
 	return (this->value >> this->integer);
-	// return (this->value);
 }
 
 Fixed::~Fixed()

@@ -11,8 +11,8 @@ private:
 public:
 	Fixed();
 	Fixed( const Fixed& fixed );
-	Fixed( const int _value );
-	Fixed( const float _value );
+	Fixed( const int value );
+	Fixed( const float value );
 
 	int getRawBits() const;
 	void setRawBits( int const raw );
