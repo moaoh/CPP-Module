@@ -52,7 +52,7 @@ void	ClapTrap::attack( const std::string& target )
 
 void	ClapTrap::takeDamage( unsigned int amount )
 {
-	std::cout << "takeDamage 🦴 " << "hitPoint : " << hitPoint << "\n";
+	std::cout << "takeDamage 🦴 " << "hitPoint ❤️  : " << hitPoint << "\n";
 	this->hitPoint -= amount;
 }
 
@@ -62,6 +62,6 @@ void	ClapTrap::beRepaired( unsigned int amount )
 	{
 		energyPoint--;
 		this->hitPoint += amount;
-		std::cout << "beRepaired... 🔧 " << "hitPoint : " << hitPoint << "\n";
+		std::cout << "beRepaired... 🔧 " << "hitPoint ❤️  : " << hitPoint << "\n";
 	}
 }

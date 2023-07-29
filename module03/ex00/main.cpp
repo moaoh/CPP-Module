@@ -3,6 +3,8 @@
 int		main(void)
 {
 	ClapTrap user("BMO");
+	ClapTrap name;
+	name = user;
 
 	user.attack( "Ice King" );
 	user.takeDamage( 5 );
