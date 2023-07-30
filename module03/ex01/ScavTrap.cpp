@@ -20,9 +20,30 @@ ScavTrap::ScavTrap( const std::string name ) : ClapTrap( name )
 	std::cout << "ScavTrap " << name << " constructor called" << std::endl;
 }
 
+ScavTrap::ScavTrap( const ScavTrap& scavTrap ) : ClapTrap( scavTrap )
+{
+	this->name = scavTrap.name;
+	this->hitPoint = scavTrap.hitPoint;
+	this->energyPoint = scavTrap.energyPoint;
+	this->attackDamage = scavTrap.attackDamage;
+
+	std::cout << "ScavTrap " << name << "Copy constructor called" << std::endl;
+}
+
 ScavTrap::~ScavTrap()
 {
 	std::cout << "ScavTrap " << name << " Destructor called" << std::endl;
+}
+
+ScavTrap	&ScavTrap::operator = ( const ScavTrap& scavTrap )
+{
+	this->name = scavTrap.name;
+	this->hitPoint = scavTrap.hitPoint;
+	this->energyPoint = scavTrap.energyPoint;
+	this->attackDamage = scavTrap.attackDamage;
+
+	std::cout << "ScavTrap operator " << this->name << " = " << scavTrap.name << " called" << std::endl;
+	return (*this);
 }
 
 // ScavTrap <name> attacks <target>, causing <damage> points of damage!

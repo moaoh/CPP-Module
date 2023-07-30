@@ -20,9 +20,30 @@ FragTrap::FragTrap( const std::string name ) : ClapTrap( name )
 	std::cout << "FragTrap " << name << " constructor called" << std::endl;
 }
 
+FragTrap::FragTrap( const FragTrap& fragTrap ) : ClapTrap( fragTrap )
+{
+	this->name = fragTrap.name;
+	this->hitPoint = fragTrap.hitPoint;
+	this->energyPoint = fragTrap.energyPoint;
+	this->attackDamage = fragTrap.attackDamage;
+
+	std::cout << "FragTrap " << name << "Copy constructor called" << std::endl;
+}
+
 FragTrap::~FragTrap()
 {
 	std::cout << "FragTrap " << name << " Destructor called" << std::endl;
+}
+
+FragTrap	&FragTrap::operator = ( const FragTrap& fragTrap )
+{
+	this->name = fragTrap.name;
+	this->hitPoint = fragTrap.hitPoint;
+	this->energyPoint = fragTrap.energyPoint;
+	this->attackDamage = fragTrap.attackDamage;
+
+	std::cout << "FragTrap operator " << this->name << " = " << fragTrap.name << " called" << std::endl;
+	return (*this);
 }
 
 void 	FragTrap::highFivesGuys(void)
