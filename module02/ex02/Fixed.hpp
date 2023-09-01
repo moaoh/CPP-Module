@@ -14,7 +14,7 @@ public:
 	Fixed( const Fixed& fixed );
 	Fixed( const int raw );
 	Fixed( const float raw );
-	
+
 	int getRawBits( void ) const;
 	void setRawBits( int const raw );
 
@@ -37,8 +37,8 @@ public:
 
 	Fixed	&operator++();
 	Fixed	&operator--();
-	Fixed	operator++(int);
-	Fixed	operator--(int);
+	const Fixed	operator++(int);
+	const Fixed	operator--(int);
 
 	static Fixed	max( Fixed& first, Fixed& second );
 	static Fixed	max( const Fixed& first, const Fixed& second );

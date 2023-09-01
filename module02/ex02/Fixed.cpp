@@ -100,14 +100,15 @@ bool	Fixed::operator != ( const Fixed& fixed ) const
 
 Fixed	Fixed::operator + ( const Fixed& fixed ) const
 {
-	Fixed temp = (this->value + fixed.value) >> integer;
-	// std::cout << temp.value << "\n";
+	Fixed temp;
+	temp.setRawBits(this->value + fixed.value);
 	return (temp);
 }
 
 Fixed	Fixed::operator - ( const Fixed& fixed ) const
 {
-	Fixed temp = (this->value - fixed.value) >> integer;
+	Fixed temp;
+	temp.setRawBits(this->value - fixed.value);
 	return (temp);
 }
 
@@ -141,14 +142,14 @@ Fixed	&Fixed::operator--()
 	return (*this);
 }
 
-Fixed	Fixed::operator++(int)
+const Fixed	Fixed::operator++(int)
 {
 	Fixed temp = *this;
 	++*this;
 	return (temp);
 }
 
-Fixed	Fixed::operator--(int)
+const Fixed	Fixed::operator--(int)
 {
 	Fixed temp = *this;
 	--*this;
@@ -157,33 +158,33 @@ Fixed	Fixed::operator--(int)
 
 Fixed	Fixed::max( Fixed& first, Fixed& second )
 {
-	if (first.value > second.value) 
+	if (first.value > second.value)
 		return first.toFloat();
-	else 
+	else
 		return second.toFloat();
 }
 
 Fixed	Fixed::max( const Fixed& first, const Fixed& second )
 {
-	if (first.value > second.value) 
+	if (first.value > second.value)
 		return first.toFloat();
-	else 
+	else
 		return second.toFloat();
 }
 
 Fixed	Fixed::min( Fixed& first, Fixed& second )
 {
-	if (first.value < second.value) 
+	if (first.value < second.value)
 		return first.toFloat();
-	else 
+	else
 		return second.toFloat();
 }
 
 Fixed	Fixed::min( const Fixed& first, const Fixed& second )
 {
-	if (first.value < second.value) 
+	if (first.value < second.value)
 		return first.toFloat();
-	else 
+	else
 		return second.toFloat();
 }
 
