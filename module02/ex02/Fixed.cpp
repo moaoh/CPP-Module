@@ -159,33 +159,33 @@ const Fixed	Fixed::operator--(int)
 Fixed	Fixed::max( Fixed& first, Fixed& second )
 {
 	if (first.value > second.value)
-		return first.toFloat();
+		return first;
 	else
-		return second.toFloat();
+		return second;
 }
 
 Fixed	Fixed::max( const Fixed& first, const Fixed& second )
 {
 	if (first.value > second.value)
-		return first.toFloat();
+		return first;
 	else
-		return second.toFloat();
+		return second;
 }
 
 Fixed	Fixed::min( Fixed& first, Fixed& second )
 {
 	if (first.value < second.value)
-		return first.toFloat();
+		return first;
 	else
-		return second.toFloat();
+		return second;
 }
 
 Fixed	Fixed::min( const Fixed& first, const Fixed& second )
 {
 	if (first.value < second.value)
-		return first.toFloat();
+		return first;
 	else
-		return second.toFloat();
+		return second;
 }
 
 // ===============   ===============
