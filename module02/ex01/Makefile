@@ -6,7 +6,7 @@ SRC = \
 
 INCLUDE_DIR = ./
 
-CC = clang++
+CC = c++
 RM = rm -f
 FLAG = -Wall -Wextra -Werror -std=c++98 -I $(INCLUDE_DIR)
 
