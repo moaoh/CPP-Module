@@ -10,7 +10,6 @@ SRC = \
 
 INCLUDE_DIR = ./
 
-CC = clang++
 RM = rm -f
 FLAG = -Wall -Wextra -Werror -std=c++98 -I $(INCLUDE_DIR)
 
@@ -31,11 +30,11 @@ CL_RESET = \e[0m
 all : $(NAME)
 
 $(NAME) : $(OBJ)
-	@$(CC) $(FLAG) -o $(NAME) $(OBJ)
+	@$(CXX) $(FLAG) -o $(NAME) $(OBJ)
 	@printf "$(CL_L_MAGENTA)🥳 Create$(CL_RESET) $(CL_BOLD)$(NAME) 🥳\n"
 
 %.o : %.cpp
-	@$(CC) $(FLAG) -c $< -o $@
+	@$(CXX) $(FLAG) -c $< -o $@
 
 clean :
 	@$(RM) $(OBJ)
