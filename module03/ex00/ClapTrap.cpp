@@ -49,9 +49,9 @@ ClapTrap	&ClapTrap::operator = ( const ClapTrap& clapTrap )
 // ClapTrap <name> attacks <target>, causing <damage> points of damage!
 void	ClapTrap::attack( const std::string& target )
 {
-	if (!this->energyPoint)
+	if (this->energyPoint <= 0)
 		std::cout << "[ClapTrap] " << this->name << "doesn't have energyPoint.. ⚔︎" << std::endl;
-	else if (!this->hitPoint)
+	else if (this->hitPoint <= 0)
 		std::cout << "[ClapTrap] " << this->name << " is dead.. " << std::endl;
 	else
 	{
@@ -63,7 +63,7 @@ void	ClapTrap::attack( const std::string& target )
 
 void	ClapTrap::takeDamage( unsigned int amount )
 {
-	if (!this->hitPoint)
+	if (this->hitPoint <= 0)
 		std::cout << "[ClapTrap] " << this->name << " is dead.. " << std::endl;
 	else
 	{
@@ -74,9 +74,9 @@ void	ClapTrap::takeDamage( unsigned int amount )
 
 void	ClapTrap::beRepaired( unsigned int amount )
 {
-	if (!this->energyPoint)
+	if (this->energyPoint <= 0)
 		std::cout << "[ClapTrap] " << this->name << "doesn't have energyPoint.. ⚙" << std::endl;
-	else if (!this->hitPoint)
+	else if (this->hitPoint <= 0)
 		std::cout << "[ClapTrap] " << this->name << " is dead.. " << std::endl;
 	else
 	{
