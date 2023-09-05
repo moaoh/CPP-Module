@@ -17,7 +17,7 @@ ClapTrap::ClapTrap( const std::string name )
 	this->energyPoint = 10;
 	this->attackDamage = 0;
 
-	std::cout << "ClapTrap " << name << " constructor called" << std::endl;
+	std::cout << "[ClapTrap] " << name << " constructor called" << std::endl;
 }
 
 ClapTrap::ClapTrap( const ClapTrap& clapTrap )
@@ -27,12 +27,12 @@ ClapTrap::ClapTrap( const ClapTrap& clapTrap )
 	this->energyPoint = clapTrap.energyPoint;
 	this->attackDamage = clapTrap.attackDamage;
 
-	std::cout << "ClapTrap " << name << "Copy constructor called" << std::endl;
+	std::cout << "[ClapTrap] " << name << "Copy constructor called" << std::endl;
 }
 
 ClapTrap::~ClapTrap()
 {
-	std::cout << "ClapTrap " << name << " Destructor called" << std::endl;
+	std::cout << "[ClapTrap] " << name << " Destructor called" << std::endl;
 }
 
 ClapTrap	&ClapTrap::operator = ( const ClapTrap& clapTrap )
@@ -50,13 +50,13 @@ ClapTrap	&ClapTrap::operator = ( const ClapTrap& clapTrap )
 void	ClapTrap::attack( const std::string& target )
 {
 	if (!this->energyPoint)
-		std::cout << "ClapTrap " << this->name << "doesn't have energyPoint.. ⚔︎" << std::endl;
+		std::cout << "[ClapTrap] " << this->name << "doesn't have energyPoint.. ⚔︎" << std::endl;
 	else if (!this->hitPoint)
-		std::cout << "ClapTrap " << this->name << " is dead.. " << std::endl;
+		std::cout << "[ClapTrap] " << this->name << " is dead.. " << std::endl;
 	else
 	{
 		energyPoint--;
-		std::cout << "ClapTrap " << this->name << " attacks " << target << "," << \
+		std::cout << "[ClapTrap] " << this->name << " attacks " << target << "," << \
 					" causing " << this->attackDamage << " points of damage!" << std::endl;
 	}
 }
@@ -64,7 +64,7 @@ void	ClapTrap::attack( const std::string& target )
 void	ClapTrap::takeDamage( unsigned int amount )
 {
 	if (!this->hitPoint)
-		std::cout << "ClapTrap " << this->name << " is dead.. " << std::endl;
+		std::cout << "[ClapTrap] " << this->name << " is dead.. " << std::endl;
 	else
 	{
 		this->hitPoint -= amount;
@@ -75,9 +75,9 @@ void	ClapTrap::takeDamage( unsigned int amount )
 void	ClapTrap::beRepaired( unsigned int amount )
 {
 	if (!this->energyPoint)
-		std::cout << "ClapTrap " << this->name << "doesn't have energyPoint.. ⚙" << std::endl;
+		std::cout << "[ClapTrap] " << this->name << "doesn't have energyPoint.. ⚙" << std::endl;
 	else if (!this->hitPoint)
-		std::cout << "ClapTrap " << this->name << " is dead.. " << std::endl;
+		std::cout << "[ClapTrap] " << this->name << " is dead.. " << std::endl;
 	else
 	{
 		energyPoint--;
