@@ -3,12 +3,15 @@
 
 int		main(void)
 {
-	ClapTrap bmo("BMO");
-	FragTrap iceKing("Ice King");
+	ClapTrap *bmo = new ClapTrap("BMO");
+	FragTrap *iceKing = new FragTrap("Ice King");
 
-	bmo.attack("Ice King");
-	iceKing.takeDamage(5);
-	iceKing.highFivesGuys();
+	bmo->attack("Ice King");
+	iceKing->takeDamage(5);
+	iceKing->highFivesGuys();
+
+	delete bmo;
+	delete iceKing;
 
 	return (0);
 }

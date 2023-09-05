@@ -17,7 +17,7 @@ FragTrap::FragTrap( const std::string name ) : ClapTrap( name )
 	this->energyPoint = 100;
 	this->attackDamage = 30;
 
-	std::cout << "FragTrap " << name << " constructor called" << std::endl;
+	std::cout << "[FragTrap] " << name << " constructor called" << std::endl;
 }
 
 FragTrap::FragTrap( const FragTrap& fragTrap ) : ClapTrap( fragTrap )
@@ -27,12 +27,12 @@ FragTrap::FragTrap( const FragTrap& fragTrap ) : ClapTrap( fragTrap )
 	this->energyPoint = fragTrap.energyPoint;
 	this->attackDamage = fragTrap.attackDamage;
 
-	std::cout << "FragTrap " << name << "Copy constructor called" << std::endl;
+	std::cout << "[FragTrap] " << name << "Copy constructor called" << std::endl;
 }
 
 FragTrap::~FragTrap()
 {
-	std::cout << "FragTrap " << name << " Destructor called" << std::endl;
+	std::cout << "[FragTrap] " << name << " Destructor called" << std::endl;
 }
 
 FragTrap	&FragTrap::operator = ( const FragTrap& fragTrap )
@@ -48,5 +48,5 @@ FragTrap	&FragTrap::operator = ( const FragTrap& fragTrap )
 
 void 	FragTrap::highFivesGuys(void)
 {
-	std::cout << "FragTrap " << name << " highFive!!" << std::endl;
+	std::cout << "[FragTrap] " << name << " highFive!!" << std::endl;
 }
