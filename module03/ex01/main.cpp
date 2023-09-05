@@ -3,14 +3,18 @@
 
 int		main(void)
 {
-	ClapTrap bmo("BMO");
-	ScavTrap iceKing("Ice King");
+	ClapTrap *bmo = new ClapTrap("BMO");
+	ScavTrap *iceKing = new ScavTrap("Ice King");
 
-	bmo.attack("Ice King");
-	iceKing.takeDamage(5);
-	iceKing.guardGate();
-	iceKing.attack("BMO");
-	bmo.takeDamage(20);
+	bmo->attack("Ice King");
+	iceKing->takeDamage(5);
+	iceKing->guardGate();
+	iceKing->attack("BMO");
+	bmo->takeDamage(20);
+	bmo->takeDamage(1);
+
+	delete bmo;
+	delete iceKing;
 
 	return (0);
 }
