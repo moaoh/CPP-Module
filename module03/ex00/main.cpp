@@ -6,13 +6,13 @@ int		main(void)
 	ClapTrap iceKing("Ice King");
 
 	bmo.attack("Ice King");
-	iceKing.takeDamage(3);
+	iceKing.takeDamage(0);
 	iceKing.attack("BMO");
-	bmo.takeDamage(6);
+	bmo.takeDamage(0);
 	bmo.beRepaired(5);
 	bmo.attack("Ice King");
-	iceKing.takeDamage(7);
-	iceKing.takeDamage(1);
+	iceKing.takeDamage(0);
+	iceKing.takeDamage(0);
 
 	return (0);
 }
