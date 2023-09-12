@@ -21,7 +21,7 @@ Character::Character( const Character& other )
 {
 	this->name = other.name;
 	for (int i = 0; i < 4; i++) {
-		this->slots[i] = other.slots[i];
+		this->slots[i] = other.slots[i]->clone();
 	}
 }
 
@@ -36,7 +36,7 @@ Character &Character::operator = ( const Character& other )
 {
 	this->name = other.name;
 	for (int i = 0; i < 4; i++) {
-		this->slots[i] = other.slots[i];
+		this->slots[i] = other.slots[i]->clone();
 	}
 	return (*this);
 }
@@ -51,7 +51,7 @@ void  Character::equip(AMateria* m)
 	if (!m) return;
 	for (int i = 0; i < 4; i++) {
 		if (!this->slots[i]) {
-			this->slots[i] = m;
+			this->slots[i] = m->clone();
 			return;
 		}
 	}
@@ -67,7 +67,7 @@ void  Character::unequip(int idx)
 // idx에 해당하는 스킬을 사용
 void  Character::use(int idx, ICharacter& target)
 {
-	if (this->slots[idx]) {
+	if (0 <= idx && idx < 4 && this->slots[idx]) {
 		if (this->slots[idx]->getType() == "ice")
 			std::cout << "* shoots an ice bolt at " << target.getName() <<  " *" << std::endl;
 		else if (this->slots[idx]->getType() == "cure")
