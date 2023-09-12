@@ -1,6 +1,10 @@
 #include "MateriaSource.hpp"
 
-MateriaSource::MateriaSource(/* args */)
+MateriaSource::MateriaSource()
+{
+}
+
+MateriaSource::MateriaSource( const MateriaSource& other )
 {
 }
 
@@ -8,7 +12,16 @@ MateriaSource::~MateriaSource()
 {
 }
 
-void	MateriaSource::learnMateria(AMateria*)
+MateriaSource &MateriaSource::operator = ( const MateriaSource& other )
+{
+}
+
+void	MateriaSource::learnMateria(AMateria* m)
+{
+
+}
+
+AMateria* MateriaSource::createMateria(std::string const & type)
 {
 
 }
