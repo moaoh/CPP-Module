@@ -1,17 +1,31 @@
 NAME = Abstract
 
-SRC = \
-	main.cpp \
-	AMateria.cpp \
-	ICharacter.cpp \
-	IMateriaSource.cpp
-
-INCLUDE_DIR = ./
-
+CXX = c++
 RM = rm -f
 FLAG = -Wall -Wextra -Werror -std=c++98 -I $(INCLUDE_DIR)
+SRC_DIR = src
+INC_DIR = inc
 
-OBJ = $(SRC:.cpp=.o)
+SRC = $(addprefix $(SRC_DIR)/, \
+	main.cpp \
+	Ice.cpp \
+	Cure.cpp \
+	AMateria.cpp \
+	ICharacter.cpp \
+	Character.cpp \
+	IMateriaSource.cpp \
+	MateriaSource.cpp \
+	)
+
+OBJ = $(addprefix $(INC_DIR)/, \
+	Ice.hpp \
+	Cure.hpp \
+	AMateria.hpp \
+	ICharacter.hpp \
+	Character.hpp \
+	IMateriaSource.hpp \
+	MateriaSource.hpp \
+	)
 
 # ==============================================
 
