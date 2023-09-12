@@ -12,9 +12,7 @@ SRC = $(addprefix $(SRC_DIR)/, \
 	Ice.cpp \
 	Cure.cpp \
 	AMateria.cpp \
-	ICharacter.cpp \
 	Character.cpp \
-	IMateriaSource.cpp \
 	MateriaSource.cpp \
 	)
 

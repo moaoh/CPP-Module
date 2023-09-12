@@ -28,13 +28,19 @@ MateriaSource &MateriaSource::operator = ( const MateriaSource& other )
 void	MateriaSource::learnMateria(AMateria* m)
 {
 	for (int i = 0; i < 4; i++) {
-		if (!this->slots[i])
+		if (!this->slots[i]) {
 			slots[i] = m;
+			break;
+		}
 	}
 }
 
 // stirng에 해당하는 ice or Cure를 반환
 AMateria* MateriaSource::createMateria(std::string const & type)
 {
-
+	for (int i = 0; i < 4; i++) {
+		if (this->slots[i] && this->slots[i]->getType() == type)
+			return (this->slots[i]->clone());
+	}
+	return (0);
 }

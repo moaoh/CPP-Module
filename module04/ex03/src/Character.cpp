@@ -45,9 +45,12 @@ std::string const & Character::getName() const
 
 void  Character::equip(AMateria* m)
 {
+	if (!m) return;
 	for (int i = 0; i < 4; i++) {
-		if (!this->slots[i])
+		if (!this->slots[i]) {
 			this->slots[i] = m;
+			break;
+		}
 	}
 }
 
@@ -62,9 +65,9 @@ void  Character::unequip(int idx)
 void  Character::use(int idx, ICharacter& target)
 {
 	if (this->slots[idx]) {
-		if (target.getName() == "ice")
+		if (this->slots[idx]->getType() == "ice")
 			std::cout << "* shoots an ice bolt at " << target.getName() <<  " *" << std::endl;
-		else if (target.getName() == "cure")
+		else if (this->slots[idx]->getType() == "cure")
 			std::cout << "* heals " << target.getName() <<  "'s wounds *" << std::endl;
 	}
 }
