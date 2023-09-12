@@ -1,20 +1,14 @@
 #include "Ice.hpp"
 
-Ice::Ice()
-{
-	this->type = "ice";
-}
+Ice::Ice() : AMateria("ice") {}
 
-Ice::Ice( const Ice& other )
-{
-	this->type = other.type;
-}
+Ice::Ice( const Ice& other ) : AMateria(other) {}
 
 Ice::~Ice() {}
 
 Ice &Ice::operator = ( const Ice& other )
 {
-	this->type = other.type;
+	this->AMateria::operator=(other);
 	return (*this);
 }
 

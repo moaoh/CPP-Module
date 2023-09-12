@@ -5,10 +5,8 @@
 
 class Ice : public AMateria
 {
-private:
-	/* data */
 public:
-	Ice(/* args */);
+	Ice();
 	Ice( const Ice& other );
 	virtual ~Ice();
 	Ice &operator = ( const Ice& other );

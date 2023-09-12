@@ -14,7 +14,12 @@ MateriaSource::MateriaSource( const MateriaSource& other )
 	}
 }
 
-MateriaSource::~MateriaSource() {}
+MateriaSource::~MateriaSource()
+{
+	for (int i = 0; i < 4; i++) {
+		delete this->slots[i];
+	}
+}
 
 MateriaSource &MateriaSource::operator = ( const MateriaSource& other )
 {
@@ -27,6 +32,7 @@ MateriaSource &MateriaSource::operator = ( const MateriaSource& other )
 // AMateria에 해당하는 ice or Cure를 저장
 void	MateriaSource::learnMateria(AMateria* m)
 {
+	if (!m) return;
 	for (int i = 0; i < 4; i++) {
 		if (!this->slots[i]) {
 			slots[i] = m;

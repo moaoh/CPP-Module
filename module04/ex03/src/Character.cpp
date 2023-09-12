@@ -27,6 +27,9 @@ Character::Character( const Character& other )
 
 Character::~Character()
 {
+	for (int i = 0; i < 4; i++) {
+		delete this->slots[i];
+	}
 }
 
 Character &Character::operator = ( const Character& other )
@@ -49,7 +52,7 @@ void  Character::equip(AMateria* m)
 	for (int i = 0; i < 4; i++) {
 		if (!this->slots[i]) {
 			this->slots[i] = m;
-			break;
+			return;
 		}
 	}
 }

@@ -8,11 +8,11 @@ FLAG = -Wall -Wextra -Werror -std=c++98 -I $(INCLUDE_DIR)
 SRC_DIR = src
 
 SRC = $(addprefix $(SRC_DIR)/, \
-	main.cpp \
-	Ice.cpp \
-	Cure.cpp \
 	AMateria.cpp \
 	Character.cpp \
+	Cure.cpp \
+	Ice.cpp \
+	main.cpp \
 	MateriaSource.cpp \
 	)
 

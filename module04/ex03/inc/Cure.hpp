@@ -5,11 +5,10 @@
 
 class Cure : public AMateria
 {
-private:
 public:
 	Cure();
-	virtual ~Cure();
 	Cure( const Cure& other );
+	virtual ~Cure();
 	Cure &operator = ( const Cure& other );
 
 	virtual AMateria* clone() const;
