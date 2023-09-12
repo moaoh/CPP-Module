@@ -1,4 +1,4 @@
-NAME = Abstract
+NAME = a.out
 
 INCLUDE_DIR = ./inc/
 

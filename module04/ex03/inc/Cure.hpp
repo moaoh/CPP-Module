@@ -6,10 +6,11 @@
 class Cure : public AMateria
 {
 private:
-	/* data */
 public:
-	Cure(/* args */);
-	~Cure();
+	Cure();
+	virtual ~Cure();
+	Cure( const Cure& other );
+	Cure &operator = ( const Cure& other );
 
 	virtual AMateria* clone() const;
 };

@@ -9,9 +9,12 @@ private:
 	/* data */
 public:
 	Ice(/* args */);
-	~Ice();
+	Ice( const Ice& other );
+	virtual ~Ice();
+	Ice &operator = ( const Ice& other );
 
 	virtual AMateria* clone() const;
 };
 
 #endif
+

@@ -6,7 +6,8 @@
 class Character : public ICharacter
 {
 private:
-	/* data */
+	AMateria *slots[4];
+	std::string	name;
 public:
 	Character();
 	Character( const std::string name );

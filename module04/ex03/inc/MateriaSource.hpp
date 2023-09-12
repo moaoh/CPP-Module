@@ -6,7 +6,7 @@
 class MateriaSource : public IMateriaSource
 {
 private:
-	/* data */
+	AMateria *slots[4];
 public:
 	MateriaSource();
 	MateriaSource( const MateriaSource& other );
