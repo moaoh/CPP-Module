@@ -2,7 +2,7 @@
 #include "Dog.hpp"
 #include "Cat.hpp"
 
-int main() 
+int main()
 {
 	Animal *animal[10];
 
@@ -26,6 +26,6 @@ int main()
 	delete operatorTest;
 	delete operatorCopy;
 
-	// system("leaks Brain");
-	return 0; 
+	system("leaks Brain");
+	return 0;
 }

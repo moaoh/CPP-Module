@@ -15,7 +15,7 @@ public:
 
 	Dog &operator = ( const Dog& dog );
 
-	void	makeSound() const;
+	virtual void	makeSound() const;
 };
 
 #endif

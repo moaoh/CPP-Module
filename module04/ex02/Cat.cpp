@@ -22,8 +22,13 @@ Cat::~Cat()
 
 Cat &Cat::operator = ( const Cat& cat )
 {
-	this->type = cat.type;
-	*this->catBrain = *cat.catBrain;
+	if (this != &cat)
+	{
+		this->type = cat.type;
+		delete this->catBrain;
+		this->catBrain = new Brain();
+		*this->catBrain = *cat.catBrain;
+	}
 	return (*this);
 }
 

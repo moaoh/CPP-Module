@@ -20,8 +20,6 @@ int main()
 	me->equip(tmp);
 	tmp = src->createMateria("cure");
 	me->equip(tmp);
-	tmp = src->createMateria(0);
-	me->equip(tmp);
 
 	ICharacter* bob = new Character("bob");
 
@@ -31,7 +29,8 @@ int main()
 	delete bob;
 	delete me;
 	delete src;
-	std::system("leaks a.out");
+
+	// std::system("leaks a.out");
 
 	return 0;
 }

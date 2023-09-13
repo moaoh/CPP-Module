@@ -22,8 +22,13 @@ Dog::~Dog()
 
 Dog &Dog::operator = ( const Dog& dog )
 {
-	this->type = dog.type;
-	*this->dogBrain = *dog.dogBrain;
+	if (this != &dog)
+	{
+		this->type = dog.type;
+		delete this->dogBrain;
+		this->dogBrain = new Brain();
+		*this->dogBrain = *dog.dogBrain;
+	}
 	return (*this);
 }
 
