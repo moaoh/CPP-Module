@@ -5,7 +5,6 @@ int	main() {
 		Bureaucrat	a("a", 150);
 		Bureaucrat	b("b", 1);
 
-
 		a.upGrade();
 		b.downGrade();
 		std::cout << a << std::endl;

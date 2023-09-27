@@ -1,11 +1,11 @@
 NAME = Bureaucrat
 
-INCLUDE_DIR = ./
+INCLUDE_DIR = ./inc/
 
 CXX = c++
 RM = rm -f
 FLAG = -Wall -Wextra -Werror -std=c++98 -I $(INCLUDE_DIR)
-SRC_DIR = ./
+SRC_DIR = ./src/
 
 SRC = $(addprefix $(SRC_DIR)/, \
 	Bureaucrat.cpp \
