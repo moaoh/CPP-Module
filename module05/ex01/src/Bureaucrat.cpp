@@ -1,35 +1,18 @@
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat()
+Bureaucrat::Bureaucrat(const std::string str, int _grade) : name(str)
 {
-	this->name = "none";
-	this->grade = 150;
+	setGrade(_grade);
 }
 
-Bureaucrat::Bureaucrat(const std::string str)
+Bureaucrat::Bureaucrat(const Bureaucrat& other) : name(other.name)
 {
-	this->name = str;
-	this->grade = 150;
-}
-
-Bureaucrat::Bureaucrat(const std::string str, const int _grade)
-{
-	this->name = str;
-	setGrade(this->grade = _grade);
-	this->grade = _grade;
-}
-
-Bureaucrat::Bureaucrat(const Bureaucrat& other)
-{
-	this->name = other.name;
-	setGrade(this->grade = other.grade);
-	this->grade = other.grade;
+	setGrade(other.grade);
 }
 
 Bureaucrat	&Bureaucrat::operator = ( const Bureaucrat& other )
 {
-	this->name = other.name;
-	this->grade = other.grade;
+	setGrade(other.grade);
 	return (*this);
 }
 
@@ -54,6 +37,7 @@ void Bureaucrat::downGrade()
 {
 	setGrade(this->grade + 1);
 }
+
 
 void Bureaucrat::setGrade(int const _grade)
 {
