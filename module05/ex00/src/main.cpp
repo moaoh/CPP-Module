@@ -10,6 +10,7 @@ int	main() {
 		std::cout << a << std::endl;
 		std::cout << b << std::endl;
 
+		// print error part
 		b.setGrade(0);
 
 		a.downGrade();
