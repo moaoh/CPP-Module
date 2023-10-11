@@ -2,13 +2,17 @@
 #define BUREAUCRAT_HPP
 
 #include <iostream>
-#include <string>
+#include <cstring>
+
+#include "Form.hpp"
+
+class Form;
 
 class Bureaucrat
 {
 private:
 	const std::string	name;
-	int					grade;
+	int								grade;
 public:
 	Bureaucrat(const std::string str, int _grade);
 	Bureaucrat(const Bureaucrat& other);
@@ -16,13 +20,11 @@ public:
 
 	Bureaucrat	&operator = ( const Bureaucrat& other );
 
-	class GradeTooHighException : public std::exception
-	{
+	class GradeTooHighException : public std::exception {
 	public:
 		const char *what() const throw();
 	};
-	class GradeTooLowException : public std::exception
-	{
+	class GradeTooLowException : public std::exception {
 	public:
 		const char *what() const throw();
 	};
@@ -32,7 +34,9 @@ public:
 	void setGrade(int _grade);
 
 	std::string getName() const;
-	int			getGrade() const;
+	int					getGrade() const;
+
+	void				signForm( Form& form );
 };
 
 std::ostream &operator << (std::ostream& os, const Bureaucrat& other);
