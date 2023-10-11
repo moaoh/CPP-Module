@@ -51,17 +51,14 @@ int			Bureaucrat::getGrade() const {
 // <bureaucrat> signed <form>
 // <bureaucrat> couldn’t sign <form> because <reason>.
 void		Bureaucrat::signForm( Form& form ) {
-	try
-	{
+	try {
 		form.beSigned(*this);
-		std::cout << this->getName() << " signed " << form.getName() << std::endl;
+		std::cout << "[" << this->getName() << "] signed [" << form.getName() << "]" << std::endl;
 	}
-	catch(const std::exception& e)
-	{
-		std::cerr << this->getName() << " couldn’t sign " \
-							<< form.getName() << " because " << e.what();
+	catch(const std::exception& e) {
+		std::cerr << "[" << this->getName() << "] couldn’t sign [" \
+							<< form.getName() << "] because " << e.what() << std::endl;
 	}
-
 }
 
 std::ostream &operator << (std::ostream& os, const Bureaucrat& other) {

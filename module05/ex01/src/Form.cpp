@@ -43,8 +43,10 @@ void	Form::beSigned( const Bureaucrat& bure ) {
 }
 
 std::ostream &operator << (std::ostream& os, const Form& other) {
-	return os << "name : " << other.getName() \
-						<< "isSign : " << other.getIsSign() \
-						<< "signGrade : " << other.getSignGrade() \
-						<< "executeGrade : " << other.getExecuteGrade() << std::endl;
+	return os << "===== Form =====" << "\n" \
+						<< "name : " << other.getName() << "\n" \
+						<< "isSign : " << other.getIsSign() << "\n" \
+						<< "signGrade : " << other.getSignGrade() << "\n" \
+						<< "executeGrade : " << other.getExecuteGrade() << "\n" \
+						<< "================" << std::endl;
 }

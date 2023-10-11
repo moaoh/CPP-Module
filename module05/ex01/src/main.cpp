@@ -5,11 +5,15 @@ int	main() {
 	try {
 		Bureaucrat	a("a", 150);
 		Bureaucrat	b("b", 1);
-		Form				text("subject", 50, 50);
+		Form				subject("subject", 50, 50);
 
-		b.signForm(text);
+		std::cout << subject;
+		b.signForm(subject);
+		std::cout << subject;
+		a.signForm(subject);
+		b.signForm(subject);
 	}
-	catch (std::exception &e) {
+	catch (const std::exception &e) {
 		std::cout << "error : " << e.what() << std::endl;
 	}
 }
