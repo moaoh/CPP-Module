@@ -18,8 +18,8 @@ private:
 
 public:
 	Form(const std::string str, const int _signGrade, const int _executeGrade);
-	Form(const Form& other);
-	Form	&operator = ( const Form& other );
+	Form(const Form& src);
+	Form	&operator = (const Form& rhs);
 	~Form();
 
 	class GradeTooHighException : public std::exception {
