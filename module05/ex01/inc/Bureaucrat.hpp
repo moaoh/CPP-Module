@@ -2,7 +2,7 @@
 #define BUREAUCRAT_HPP
 
 #include <iostream>
-#include <cstring>
+#include <string>
 
 #include "Form.hpp"
 
