@@ -1,15 +1,22 @@
-#include "Form.hpp"
+#include "../inc/Form.hpp"
 
-Form::Form(const std::string str, const int _signGrade, const int _executeGrade) :
-		name(str),
+Form::Form(const std::string _name, const int _signGrade, const int _executeGrade) :
+		name(_name),
 		signGrade(_signGrade),
-		executeGrade(_executeGrade) {}
+		executeGrade(_executeGrade) {
+			this->isSign = false;
+}
 
-Form::Form(const Form& other) :
-			name(other.name),
-			signGrade(other.signGrade),
-			executeGrade(other.executeGrade) {
-		this->isSign = other.isSign;
+Form::Form(const Form& src) :
+			name(src.name),
+			signGrade(src.signGrade),
+			executeGrade(src.executeGrade) {
+		this->isSign = src.isSign;
+}
+
+Form	&Form::operator = (const Form& rhs) {
+	this->isSign = rhs.getIsSign();
+	return (*this);
 }
 
 Form::~Form() {}

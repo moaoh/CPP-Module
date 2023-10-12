@@ -1,4 +1,4 @@
-#include "Bureaucrat.hpp"
+#include "../inc/Bureaucrat.hpp"
 
 Bureaucrat::Bureaucrat(const std::string str, int _grade) : name(str) {
 	setGrade(_grade);

@@ -17,7 +17,7 @@ private:
 	const int					executeGrade;
 
 public:
-	Form(const std::string str, const int _signGrade, const int _executeGrade);
+	Form(const std::string _name, const int _signGrade, const int _executeGrade);
 	Form(const Form& src);
 	Form	&operator = (const Form& rhs);
 	~Form();
