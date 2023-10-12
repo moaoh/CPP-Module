@@ -1,7 +1,8 @@
 #include "../inc/RobotomyRequestForm.hpp"
 
-RobotomyRequestForm::RobotomyRequestForm(std::string _target) :
-	AForm("none", _target, 72, 45) {}
+RobotomyRequestForm::RobotomyRequestForm(
+	std::string _name, std::string _target) :
+	AForm(_name, _target, 72, 45) {}
 
 RobotomyRequestForm::~RobotomyRequestForm() {}
 
@@ -19,6 +20,6 @@ void RobotomyRequestForm::execute(Bureaucrat const & executor) const {
 		}
 	}
 	catch(const std::exception& e) {
-		std::cerr << "[RobotomyRequestForm] error :" << e.what() << '\n';
+		std::cerr << "[RobotomyRequestForm] error : " << e.what() << '\n';
 	}
 }
