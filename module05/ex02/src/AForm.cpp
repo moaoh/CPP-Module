@@ -1,49 +1,70 @@
-#include "Form.hpp"
+#include "../inc/AForm.hpp"
 
-Form::Form(const std::string str, const int _signGrade, const int _executeGrade) :
-		name(str),
+AForm::AForm(const std::string _name,
+		const std::string _target,
+		const int _signGrade,
+		const int _executeGrade) :
+		name(_name),
+		target(_target),
 		signGrade(_signGrade),
-		executeGrade(_executeGrade) {}
-
-Form::Form(const Form& other) :
-			name(other.name),
-			signGrade(other.signGrade),
-			executeGrade(other.executeGrade) {
-		this->isSign = other.isSign;
+		executeGrade(_executeGrade) {
+	this->isSign = false;
 }
 
-Form::~Form() {}
-
-const char* Form::GradeTooHighException::what() const throw() {
-	return ("Form: Grade too high");
+AForm::AForm(const AForm& other) :
+		name(other.name),
+		signGrade(other.signGrade),
+		executeGrade(other.executeGrade) {
+	this->isSign = other.isSign;
 }
 
-const char* Form::GradeTooLowException::what() const throw() {
-	return ("Form: Grade too low");
+AForm	&AForm::operator = (const AForm& rhs) {
+	this->isSign = rhs.getIsSign();
+	return (*this);
 }
 
-std::string		Form::getName() const {
+AForm::~AForm() {}
+
+const char* AForm::GradeTooHighException::what() const throw() {
+	return ("AForm: Grade too high");
+}
+
+const char* AForm::GradeTooLowException::what() const throw() {
+	return ("AForm: Grade too low");
+}
+
+std::string		AForm::getName() const {
 	return this->name;
 }
-bool					Form::getIsSign() const {
+std::string		AForm::getTarget() const {
+	return this->target;
+}
+bool					AForm::getIsSign() const {
 	return this->isSign;
 }
-int						Form::getSignGrade() const {
+int						AForm::getSignGrade() const {
 	return this->signGrade;
 }
-int						Form::getExecuteGrade() const {
+int						AForm::getExecuteGrade() const {
 	return this->executeGrade;
 }
 
-void	Form::beSigned( const Bureaucrat& bure ) {
+void	AForm::beSigned( const Bureaucrat& bure ) {
 	if (bure.getGrade() > this->getExecuteGrade()) {
-		return throw Form::GradeTooLowException();
+		return throw AForm::GradeTooLowException();
 	}
 	this->isSign = true;
 }
 
-std::ostream &operator << (std::ostream& os, const Form& other) {
-	return os << "===== Form =====" << "\n" \
+
+void		AForm::checkExecutor(Bureaucrat const & executor) const {
+	if (this->getExecuteGrade() < executor.getGrade()) {
+		throw Bureaucrat::GradeTooLowException();
+	}
+}
+
+std::ostream &operator << (std::ostream& os, const AForm& other) {
+	return os << "===== AForm =====" << "\n" \
 						<< "name : " << other.getName() << "\n" \
 						<< "isSign : " << other.getIsSign() << "\n" \
 						<< "signGrade : " << other.getSignGrade() << "\n" \

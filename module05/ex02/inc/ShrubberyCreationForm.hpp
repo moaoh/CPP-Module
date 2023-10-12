@@ -4,12 +4,36 @@
 #include <iostream>
 #include <string>
 
-class ShrubberyCreationForm
+#include "AForm.hpp"
+
+class ShrubberyCreationForm : public AForm
 {
 private:
 public:
-	ShrubberyCreationForm();
-	~ShrubberyCreationForm();
+	ShrubberyCreationForm(std::string _target);
+	ShrubberyCreationForm(const ShrubberyCreationForm& src);
+	ShrubberyCreationForm	&operator = (const ShrubberyCreationForm& rhs);
+	virtual ~ShrubberyCreationForm();
+
+	virtual void execute(Bureaucrat const & executor) const;
 };
+
+#define ASCII_TREE_ART "\
+          .     .  .      +     .      .          . \n\
+     .       .      .     #       .           . \n\
+        .      .         ###            .      .      . \n\
+      .      .   \"#:. .:##\"##:. .:#\"  .      . \n\
+          .      . \"####\"###\"####\"  . \n\
+       .     \"#:.    .:#\"###\"#:.    .:#\"  .        .       . \n\
+  .             \"#########\"#########\"        .        . \n\
+        .    \"#:.  \"####\"###\"####\"  .:#\"   .       . \n\
+     .     .  \"#######\"\"##\"##\"\"#######\"                  . \n\
+                .\"##\"#####\"#####\"##\"           .      . \n\
+    .   \"#:. ...  .:##\"###\"###\"##:.  ... .:#\"     . \n\
+      .     \"#######\"##\"#####\"##\"#######\"      .     . \n\
+    .    .     \"#####\"\"#######\"\"#####\"    .      . \n\
+            .     \"      000      \"    .     . \n\
+       .         .   .   000     .        .       . \n\
+.. .. ..................O000O........................ ...... ..."
 
 #endif

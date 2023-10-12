@@ -1,4 +1,4 @@
-NAME = ShrubberyCreationForm
+NAME = AForm
 
 INCLUDE_DIR = ./inc/
 
@@ -8,9 +8,12 @@ FLAG = -Wall -Wextra -Werror -std=c++98 -I $(INCLUDE_DIR)
 SRC_DIR = ./src/
 
 SRC = $(addprefix $(SRC_DIR)/, \
+	AForm.cpp \
 	Bureaucrat.cpp \
-	Form.cpp \
 	main.cpp \
+	PresidentialPardonForm.cpp \
+	ShrubberyCreationForm.cpp \
+	RobotomyRequestForm.cpp \
 	)
 
 OBJ = $(SRC:.cpp=.o)
@@ -41,7 +44,7 @@ clean :
 	@printf "$(CL_RED)💀 Erase $(CL_L_YELLOW)*.o\n"
 
 fclean : clean
-	@$(RM) $(NAME)
+	@$(RM) $(NAME) target_shrubbery
 	@printf "$(CL_RED)💀 Erase $(CL_L_YELLOW)$(NAME)\n"
 
 re : fclean all

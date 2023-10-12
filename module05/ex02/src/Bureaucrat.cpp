@@ -1,4 +1,4 @@
-#include "Bureaucrat.hpp"
+#include "../inc/Bureaucrat.hpp"
 
 Bureaucrat::Bureaucrat(const std::string str, int _grade) : name(str) {
 	setGrade(_grade);
@@ -50,14 +50,23 @@ int			Bureaucrat::getGrade() const {
 
 // <bureaucrat> signed <form>
 // <bureaucrat> couldn’t sign <form> because <reason>.
-void		Bureaucrat::signForm( Form& form ) {
+void		Bureaucrat::signForm( AForm& aform ) {
 	try {
-		form.beSigned(*this);
-		std::cout << "[" << this->getName() << "] signed [" << form.getName() << "]" << std::endl;
+		aform.beSigned(*this);
+		std::cout << "[" << this->getName() << "] signed [" << aform.getName() << "]" << std::endl;
 	}
 	catch(const std::exception& e) {
 		std::cerr << "[" << this->getName() << "] couldn’t sign [" \
-							<< form.getName() << "] because " << e.what() << std::endl;
+							<< aform.getName() << "] because " << e.what() << std::endl;
+	}
+}
+void		Bureaucrat::executeForm(AForm const & aform) {
+	try {
+		aform.checkExecutor(*this);
+		std::cout << this->getName() << " executed " << aform.getName() << std::endl;
+	}
+	catch(const std::exception& e) {
+		std::cerr << "[executeForm] error :" << e.what() << '\n';
 	}
 }
 
