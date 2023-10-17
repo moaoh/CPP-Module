@@ -12,7 +12,7 @@ class Bureaucrat
 {
 private:
 	const std::string	name;
-	int								grade;
+	int					grade;
 public:
 	Bureaucrat(const std::string str, int _grade);
 	Bureaucrat(const Bureaucrat& src);
@@ -34,10 +34,10 @@ public:
 	void setGrade(int _grade);
 
 	std::string getName() const;
-	int					getGrade() const;
+	int			getGrade() const;
 
-	void				signForm( AForm& aform );
-	void				executeForm(AForm const & aform);
+	void		signForm( AForm& aform );
+	void		executeForm(AForm const & aform);
 };
 
 std::ostream &operator << (std::ostream& os, const Bureaucrat& other);

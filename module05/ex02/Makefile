@@ -47,4 +47,4 @@ fclean : clean
 	@$(RM) $(NAME) *_shrubbery
 	@printf "$(CL_RED)💀 Erase $(CL_L_YELLOW)$(NAME)\n"
 
-re : fclean all
+re : all clean fclean

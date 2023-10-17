@@ -12,10 +12,10 @@ AForm::AForm(const std::string _name,
 }
 
 AForm::AForm(const AForm& other) :
-		name(other.name),
-		signGrade(other.signGrade),
-		executeGrade(other.executeGrade) {
-	this->isSign = other.isSign;
+		name(other.getName()),
+		signGrade(other.getSignGrade()),
+		executeGrade(other.getExecuteGrade()) {
+	this->isSign = other.getIsSign();
 }
 
 AForm	&AForm::operator = (const AForm& rhs) {

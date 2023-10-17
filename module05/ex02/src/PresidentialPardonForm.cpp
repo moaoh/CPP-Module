@@ -1,9 +1,15 @@
 #include "../inc/PresidentialPardonForm.hpp"
 
-
 PresidentialPardonForm::PresidentialPardonForm(
 	std::string _name, std::string _target) :
 	AForm(_name, _target, 145, 137) {}
+
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& src) : AForm(src) {}
+
+PresidentialPardonForm	&PresidentialPardonForm::operator = (const PresidentialPardonForm& rhs) {
+	this->AForm::operator=(rhs);
+	return (*this);
+}
 
 PresidentialPardonForm::~PresidentialPardonForm() {}
 

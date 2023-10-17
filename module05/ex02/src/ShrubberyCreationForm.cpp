@@ -4,6 +4,13 @@ ShrubberyCreationForm::ShrubberyCreationForm(
 	std::string _name, std::string _target) :
 	AForm(_name, _target, 25, 5) {}
 
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& src) : AForm(src) {}
+
+ShrubberyCreationForm	&ShrubberyCreationForm::operator = (const ShrubberyCreationForm& rhs) {
+	this->AForm::operator=(rhs);
+	return (*this);
+}
+
 ShrubberyCreationForm::~ShrubberyCreationForm() {}
 
 void ShrubberyCreationForm::execute(Bureaucrat const & executor) const {

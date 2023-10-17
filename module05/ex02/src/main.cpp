@@ -10,8 +10,8 @@ int	main() {
 		Bureaucrat	b("b", 1);
 
 		PresidentialPardonForm	form1("form1", "target1");
-		RobotomyRequestForm			form2("form2", "target2");
-		ShrubberyCreationForm		form3("form3", "target3");
+		RobotomyRequestForm		form2("form2", "target2");
+		ShrubberyCreationForm	form3("form3", "target3");
 		form1.execute(b);
 		form2.execute(a);
 		form3.execute(b);
