@@ -14,9 +14,9 @@ class AForm
 private:
 	const std::string	name;
 	const std::string	target;
-	bool							isSign;
-	const int					signGrade;
-	const int					executeGrade;
+	bool				isSign;
+	const int			signGrade;
+	const int			executeGrade;
 
 public:
 	AForm(const std::string _name,
@@ -36,16 +36,16 @@ public:
 		const char *what() const throw();
 	};
 
-	std::string	getName() const;
-	std::string	getTarget() const;
-	bool				getIsSign() const;
-	int					getSignGrade() const;
-	int					getExecuteGrade() const;
+	std::string		getName() const;
+	std::string		getTarget() const;
+	bool			getIsSign() const;
+	int				getSignGrade() const;
+	int				getExecuteGrade() const;
 
-	void	beSigned( const Bureaucrat& bure );
-	virtual void execute(Bureaucrat const & executor) const = 0;
+	void			beSigned( const Bureaucrat& bure );
+	virtual void 	execute(Bureaucrat const & executor) const = 0;
 
-	void	checkExecutor(Bureaucrat const & executor) const;
+	void			checkExecutor(Bureaucrat const & executor) const;
 };
 
 std::ostream &operator << (std::ostream& os, const AForm& other);

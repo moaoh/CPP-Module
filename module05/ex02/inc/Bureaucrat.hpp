@@ -29,9 +29,9 @@ public:
 		const char *what() const throw();
 	};
 
-	void upGrade();
-	void downGrade();
-	void setGrade(int _grade);
+	void 		upGrade();
+	void 		downGrade();
+	void 		setGrade(int _grade);
 
 	std::string getName() const;
 	int			getGrade() const;
