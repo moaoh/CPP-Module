@@ -1,8 +1,7 @@
 #include "../inc/PresidentialPardonForm.hpp"
 
-PresidentialPardonForm::PresidentialPardonForm(
-	std::string _name, std::string _target) :
-	AForm(_name, _target, 145, 137) {}
+PresidentialPardonForm::PresidentialPardonForm(std::string _target) : \
+	AForm("Presidential Pardon", _target, 145, 137) {}
 
 PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& src) : AForm(src) {}
 

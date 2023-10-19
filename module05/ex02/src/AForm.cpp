@@ -19,6 +19,9 @@ AForm::AForm(const AForm& other) :
 }
 
 AForm	&AForm::operator = (const AForm& rhs) {
+	if (this == &rhs) {
+		return *this;
+	}
 	this->isSign = rhs.getIsSign();
 	return (*this);
 }
