@@ -17,16 +17,13 @@ public:
 	Intern &operator = (Intern const& rhs);
 	~Intern();
 
-	AForm *makeForm(std::string const &formName, std::string const &target);
-
 	class InvalidFormName : public std::exception
 	{
 	public:
-		const char *what() const throw()
-		{
-			return ("Intern can't create Form");
-		}
+		const char *what() const throw();
 	};
+
+	AForm *makeForm(std::string const &formName, std::string const &target);
 };
 
 #endif

@@ -11,6 +11,10 @@ Intern &Intern::operator = (Intern const& rhs) {
 
 Intern::~Intern() {}
 
+const char* Intern::InvalidFormName::what() const throw() {
+	return ("Intern can't create Form");
+}
+
 AForm *Intern::makeForm(std::string const &formName, std::string const &target)
 {
 	const std::string formNames[3] = {
@@ -32,3 +36,5 @@ AForm *Intern::makeForm(std::string const &formName, std::string const &target)
 	}
 	throw Intern::InvalidFormName();
 }
+
+

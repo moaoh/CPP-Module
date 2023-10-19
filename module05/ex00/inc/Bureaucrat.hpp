@@ -15,7 +15,6 @@ public:
 	Bureaucrat	&operator = (const Bureaucrat& rhs);
 	~Bureaucrat();
 
-
 	class GradeTooHighException : public std::exception
 	{
 	public:
