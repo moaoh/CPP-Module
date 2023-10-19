@@ -8,15 +8,16 @@
 
 class PresidentialPardonForm : public AForm
 {
-private:
 public:
 	PresidentialPardonForm(std::string _target);
 	PresidentialPardonForm(const PresidentialPardonForm& src);
 	PresidentialPardonForm	&operator = (const PresidentialPardonForm& rhs);
 	virtual ~PresidentialPardonForm();
 
-	virtual void execute(Bureaucrat const & executor) const;
 	static AForm *create(std::string const& target);
+
+private:
+	virtual void execute(Bureaucrat const & executor) const;
 };
 
 #endif

@@ -59,6 +59,11 @@ void	AForm::beSigned( const Bureaucrat& bure ) {
 	this->isSign = true;
 }
 
+void		AForm::checkIsSign() const {
+	if (this->getIsSign() == false) {
+		throw AForm::UnsignedForm();
+	}
+}
 
 void		AForm::checkExecutor(Bureaucrat const & executor) const {
 	if (this->getExecuteGrade() < executor.getGrade()) {

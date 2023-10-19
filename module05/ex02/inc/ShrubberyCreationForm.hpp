@@ -8,13 +8,13 @@
 
 class ShrubberyCreationForm : public AForm
 {
-private:
 public:
 	ShrubberyCreationForm(std::string _target);
 	ShrubberyCreationForm(const ShrubberyCreationForm& src);
 	ShrubberyCreationForm	&operator = (const ShrubberyCreationForm& rhs);
 	virtual ~ShrubberyCreationForm();
 
+private:
 	virtual void execute(Bureaucrat const & executor) const;
 };
 

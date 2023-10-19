@@ -8,15 +8,16 @@
 
 class ShrubberyCreationForm : public AForm
 {
-private:
 public:
 	ShrubberyCreationForm(std::string _target);
 	ShrubberyCreationForm(const ShrubberyCreationForm& src);
 	ShrubberyCreationForm	&operator = (const ShrubberyCreationForm& rhs);
 	virtual ~ShrubberyCreationForm();
 
-	virtual void execute(Bureaucrat const & executor) const;
   static AForm *create(std::string const& target);
+
+private:
+	virtual void execute(Bureaucrat const & executor) const;
 };
 
 #define ASCII_TREE_ART "\

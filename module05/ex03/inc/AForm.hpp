@@ -35,6 +35,10 @@ public:
 	public:
 		const char *what() const throw();
 	};
+	class UnsignedForm : public std::exception {
+	public:
+		const char *what() const throw();
+	};
 
 	std::string		getName() const;
 	std::string		getTarget() const;
@@ -45,6 +49,7 @@ public:
 	void			beSigned( const Bureaucrat& bure );
 	virtual void 	execute(Bureaucrat const & executor) const = 0;
 
+	void			checkIsSign() const;
 	void			checkExecutor(Bureaucrat const & executor) const;
 };
 

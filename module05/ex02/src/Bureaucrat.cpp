@@ -60,9 +60,12 @@ void		Bureaucrat::signForm( AForm& aform ) {
 							<< aform.getName() << "] because " << e.what() << std::endl;
 	}
 }
+
 void		Bureaucrat::executeForm(AForm const & aform) {
 	try {
+		aform.checkIsSign();
 		aform.checkExecutor(*this);
+		aform.execute(*this);
 		std::cout << this->getName() << " executed " << aform.getName() << std::endl;
 	}
 	catch(const std::exception& e) {

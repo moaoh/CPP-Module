@@ -29,11 +29,15 @@ AForm	&AForm::operator = (const AForm& rhs) {
 AForm::~AForm() {}
 
 const char* AForm::GradeTooHighException::what() const throw() {
-	return ("AForm: Grade too high");
+	return ("Grade too high");
 }
 
 const char* AForm::GradeTooLowException::what() const throw() {
-	return ("AForm: Grade too low");
+	return ("Grade too low");
+}
+
+const char* AForm::UnsignedForm::what() const throw() {
+	return ("Unsigned Form");
 }
 
 std::string		AForm::getName() const {
@@ -59,6 +63,11 @@ void	AForm::beSigned( const Bureaucrat& bure ) {
 	this->isSign = true;
 }
 
+void		AForm::checkIsSign() const {
+	if (this->getIsSign() == false) {
+		throw AForm::UnsignedForm();
+	}
+}
 
 void		AForm::checkExecutor(Bureaucrat const & executor) const {
 	if (this->getExecuteGrade() < executor.getGrade()) {
