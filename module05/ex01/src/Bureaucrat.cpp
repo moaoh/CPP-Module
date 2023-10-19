@@ -4,12 +4,15 @@ Bureaucrat::Bureaucrat(const std::string str, int _grade) : name(str) {
 	setGrade(_grade);
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat& other) : name(other.name) {
-	setGrade(other.grade);
+Bureaucrat::Bureaucrat(const Bureaucrat& src) : name(src.name) {
+	setGrade(src.grade);
 }
 
-Bureaucrat	&Bureaucrat::operator = ( const Bureaucrat& other ) {
-	setGrade(other.grade);
+Bureaucrat	&Bureaucrat::operator = ( const Bureaucrat& rhs ) {
+	if (this == &rhs) {
+		return *this;
+	}
+	setGrade(rhs.grade);
 	return (*this);
 }
 

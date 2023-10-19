@@ -6,6 +6,9 @@ RobotomyRequestForm::RobotomyRequestForm(std::string _target) : \
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& src) : AForm(src) {}
 
 RobotomyRequestForm	&RobotomyRequestForm::operator = (const RobotomyRequestForm& rhs) {
+	if (this == &rhs) {
+		return *this;
+	}
 	this->AForm::operator=(rhs);
 	return (*this);
 }

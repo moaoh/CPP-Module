@@ -6,6 +6,9 @@ PresidentialPardonForm::PresidentialPardonForm(std::string _target) : \
 PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& src) : AForm(src) {}
 
 PresidentialPardonForm	&PresidentialPardonForm::operator = (const PresidentialPardonForm& rhs) {
+	if (this == &rhs) {
+		return *this;
+	}
 	this->AForm::operator=(rhs);
 	return (*this);
 }

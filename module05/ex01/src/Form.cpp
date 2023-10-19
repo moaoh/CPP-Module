@@ -15,6 +15,9 @@ Form::Form(const Form& src) :
 }
 
 Form	&Form::operator = (const Form& rhs) {
+	if (this == &rhs) {
+		return *this;
+	}
 	this->isSign = rhs.getIsSign();
 	return (*this);
 }

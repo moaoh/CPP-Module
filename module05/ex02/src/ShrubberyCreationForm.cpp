@@ -6,6 +6,9 @@ ShrubberyCreationForm::ShrubberyCreationForm(std::string _target) : \
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& src) : AForm(src) {}
 
 ShrubberyCreationForm	&ShrubberyCreationForm::operator = (const ShrubberyCreationForm& rhs) {
+	if (this == &rhs) {
+		return *this;
+	}
 	this->AForm::operator=(rhs);
 	return (*this);
 }
