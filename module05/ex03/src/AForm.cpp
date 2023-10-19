@@ -1,4 +1,4 @@
-#include "../inc/AForm.hpp"
+#include "AForm.hpp"
 
 AForm::AForm(const std::string _name,
 		const std::string _target,

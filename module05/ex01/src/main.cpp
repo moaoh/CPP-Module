@@ -1,5 +1,5 @@
-#include "../inc/Bureaucrat.hpp"
-#include "../inc/Form.hpp"
+#include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 int	main() {
 	Bureaucrat	superBureaucrat("superBureaucrat", 1);

@@ -1,4 +1,4 @@
-#include "../inc/RobotomyRequestForm.hpp"
+#include "RobotomyRequestForm.hpp"
 
 RobotomyRequestForm::RobotomyRequestForm(std::string _target) : \
 	AForm("Robotomy Request", _target, 72, 45) {}

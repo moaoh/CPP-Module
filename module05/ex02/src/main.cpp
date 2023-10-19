@@ -1,4 +1,4 @@
-#include "../inc/Bureaucrat.hpp"
+#include "Bureaucrat.hpp"
 #include "AForm.hpp"
 #include "PresidentialPardonForm.hpp"
 #include "RobotomyRequestForm.hpp"

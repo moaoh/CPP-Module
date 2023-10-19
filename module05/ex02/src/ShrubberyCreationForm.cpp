@@ -1,4 +1,4 @@
-#include "../inc/ShrubberyCreationForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 
 ShrubberyCreationForm::ShrubberyCreationForm(std::string _target) : \
 	AForm("Shrubbery Creation", _target, 25, 5) {}

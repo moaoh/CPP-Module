@@ -1,4 +1,4 @@
-#include "../inc/PresidentialPardonForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 PresidentialPardonForm::PresidentialPardonForm(std::string _target) : \
 	AForm("Presidential Pardon", _target, 145, 137) {}
