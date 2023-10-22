@@ -2,22 +2,23 @@
 #define SCALARCONVERTER_HPP_
 
 #include <iostream>
+#include <cctype>
 
 class ScalarConverter
 {
 public:
-	static void		printCharValue(const double &doubleValue);
-	static void		printIntValue(const double &doubleValue);
-	static void		printFloatValue(const double &doubleValue);
-	static void		printDoubleValue(const double &doubleValue);
 
 	static void 	convert(const std::string &value);
 
-	class NonDisplayable : public std::exception {
+	class NonDisplayableException : public std::exception {
 	public:
 		const char *what() const throw();
 	};
-	class Impossible : public std::exception {
+	class ImpossibleException : public std::exception {
+	public:
+		const char *what() const throw();
+	};
+	class OverflowsException : public std::exception {
 	public:
 		const char *what() const throw();
 	};
@@ -27,6 +28,11 @@ private:
 	ScalarConverter(const ScalarConverter& src);
 	ScalarConverter &operator=(const ScalarConverter& rhs);
 	~ScalarConverter();
+
+	static void		toCharValue(const std::string &strValue);
+	static void		toIntValue(const std::string &strValue);
+	static void		toFloatValue(const std::string &strValue);
+	static void		toDoubleValue(const std::string &strValue);
 };
 
 #endif
