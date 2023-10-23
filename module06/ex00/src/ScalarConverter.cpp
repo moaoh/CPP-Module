@@ -22,20 +22,23 @@ const char* ScalarConverter::OverflowsException::what() const throw() {
 
 void	ScalarConverter::toCharValue(const std::string &strValue) {
 	char	charValue;
-	int		intValue;
+	char	*endptr;
 	try {
-		if (strValue.size() == 1 && (strValue[0] < '0' || '9' < strValue[0])) {
-			charValue = static_cast<int>(strValue[0]);
-			if (charValue < 0 || 127 < charValue) {
+		if (strValue.size() != 1) {
+			throw ImpossibleException();
+		}
+		double	doubleValue = std::strtod(strValue.c_str(), &endptr);
+		if (doubleValue < 0 || 127 < doubleValue) {
+			throw ImpossibleException();
+		}
+		if (*endptr == '\0' || *endptr == 'f') {
+			if (std::isnan(doubleValue) || std::isinf(doubleValue)) {
 				throw ImpossibleException();
 			}
+			charValue = static_cast<char>(doubleValue);
 		}
 		else {
-			intValue = std::stoi(strValue);
-			if (intValue < 0 || 255 < intValue) {
-				throw ImpossibleException();
-			}
-			charValue = std::stoi(strValue);
+			charValue = strValue[0];
 		}
 	}
 	catch(...) {
@@ -48,62 +51,82 @@ void	ScalarConverter::toCharValue(const std::string &strValue) {
 }
 
 void	ScalarConverter::toIntValue(const std::string &strValue) {
-	int intValue;
+	int		intValue;
+	char	*endptr;
+	double	doubleValue;
 	try {
-		if (strValue.size() == 1) {
-			intValue = static_cast<int>(strValue[0]);
+		if (strValue.size() != 1) {
+			throw ImpossibleException();
+		}
+		doubleValue = std::strtod(strValue.c_str(), &endptr);
+		if (*endptr == '\0' || *endptr == 'f') {
+			if (std::isnan(doubleValue) || std::isinf(doubleValue)) {
+				throw ImpossibleException();
+			}
+			intValue = static_cast<int>(doubleValue);
 		}
 		else {
-			intValue = std::stoi(strValue);
+			intValue = *endptr;
 		}
-	}
-	catch (const std::out_of_range& e) {
-		throw OverflowsException();
 	}
 	catch(...) {
 		throw ImpossibleException();
+	}
+	if (doubleValue < INT_MIN || INT_MAX < doubleValue) {
+		throw OverflowsException();
 	}
 	std::cout << intValue << std::endl;
 }
 
 void	ScalarConverter::toFloatValue(const std::string &strValue) {
 	float floatValue;
+	char	*endptr;
+	double	doubleValue;
 	try {
-		if (strValue.size() == 1) {
-			floatValue = static_cast<float>(strValue[0]);
+		if (strValue.size() != 1) {
+			throw ImpossibleException();
+		}
+		doubleValue = std::strtod(strValue.c_str(), &endptr);
+		if (*endptr == '\0' || *endptr == 'f') {
+			floatValue = static_cast<float>(doubleValue);
 		}
 		else {
-			floatValue = std::stof(strValue);
+			floatValue = *endptr;
 		}
 	}
 	catch(...) {
 		throw ImpossibleException();
 	}
-	if (!std::isprint(floatValue)) {
+	if (doubleValue < INT_MIN || INT_MAX < doubleValue) {
 		throw OverflowsException();
 	}
-	if (!std::isnan(floatValue)) {
+	std::cout << floatValue;
+	if (!std::isnan(floatValue) && !std::isinf(floatValue)) {
 		std::cout << ".0";
 	}
-	std::cout << "f" << std::endl;
+	std::cout << 'f' << std::endl;
 }
 
 void	ScalarConverter::toDoubleValue(const std::string &strValue) {
-	double doubleValue;
+	double	doubleValue_;
+	char	*endptr;
 	try {
-		if (strValue.size() == 1) {
-			doubleValue = static_cast<double>(strValue[0]);
+		if (strValue.size() != 1) {
+			throw ImpossibleException();
+		}
+		double	doubleValue = std::strtod(strValue.c_str(), &endptr);
+		if (*endptr == '\0' || *endptr == 'f') {
+			doubleValue_ = static_cast<double>(doubleValue);
 		}
 		else {
-			/* 2.14748e+09형태의 값을 -> 2147483650 형식으로 변환 필요. */
-			doubleValue = std::stod(strValue);
+			doubleValue_ = *endptr;
 		}
 	}
 	catch(...) {
 		throw ImpossibleException();
 	}
-	std::cout << doubleValue;
-	if (!std::isnan(doubleValue)) {
+	std::cout << doubleValue_;
+	if (!std::isnan(doubleValue_) && !std::isinf(doubleValue_)) {
 		std::cout << ".0";
 	}
 }

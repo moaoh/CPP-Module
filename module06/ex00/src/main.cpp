@@ -34,7 +34,7 @@ float: 42.0f
 double: 42.0
 
 ./convert a
-char: a
+char: 'a'
 int: 97
 float: 97.0f
 double: 97.0

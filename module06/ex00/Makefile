@@ -4,7 +4,8 @@ INCLUDE_DIR = ./inc/
 
 CXX = c++
 RM = rm -f
-FLAG = -Wall -Wextra -Werror -std=c++98 -I $(INCLUDE_DIR)
+FLAG = -Wall -Wextra -std=c++98 -I $(INCLUDE_DIR)
+# FLAG = -Wall -Wextra -Werror -std=c++98 -I $(INCLUDE_DIR)
 SRC_DIR = ./src/
 
 SRC = $(addprefix $(SRC_DIR)/, \
