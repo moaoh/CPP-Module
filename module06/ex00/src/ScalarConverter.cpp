@@ -24,9 +24,6 @@ void	ScalarConverter::toCharValue(const std::string &strValue) {
 	char	charValue;
 	char	*endptr;
 	try {
-		if (strValue.size() != 1) {
-			throw ImpossibleException();
-		}
 		double	doubleValue = std::strtod(strValue.c_str(), &endptr);
 		if (doubleValue < 0 || 127 < doubleValue) {
 			throw ImpossibleException();
@@ -38,6 +35,9 @@ void	ScalarConverter::toCharValue(const std::string &strValue) {
 			charValue = static_cast<char>(doubleValue);
 		}
 		else {
+			if (strValue.size() != 1) {
+				throw ImpossibleException();
+			}
 			charValue = strValue[0];
 		}
 	}
@@ -55,9 +55,6 @@ void	ScalarConverter::toIntValue(const std::string &strValue) {
 	char	*endptr;
 	double	doubleValue;
 	try {
-		if (strValue.size() != 1) {
-			throw ImpossibleException();
-		}
 		doubleValue = std::strtod(strValue.c_str(), &endptr);
 		if (*endptr == '\0' || *endptr == 'f') {
 			if (std::isnan(doubleValue) || std::isinf(doubleValue)) {
@@ -66,6 +63,9 @@ void	ScalarConverter::toIntValue(const std::string &strValue) {
 			intValue = static_cast<int>(doubleValue);
 		}
 		else {
+			if (strValue.size() != 1) {
+				throw ImpossibleException();
+			}
 			intValue = *endptr;
 		}
 	}
@@ -83,14 +83,14 @@ void	ScalarConverter::toFloatValue(const std::string &strValue) {
 	char	*endptr;
 	double	doubleValue;
 	try {
-		if (strValue.size() != 1) {
-			throw ImpossibleException();
-		}
 		doubleValue = std::strtod(strValue.c_str(), &endptr);
 		if (*endptr == '\0' || *endptr == 'f') {
 			floatValue = static_cast<float>(doubleValue);
 		}
 		else {
+			if (strValue.size() != 1) {
+				throw ImpossibleException();
+			}
 			floatValue = *endptr;
 		}
 	}
@@ -111,14 +111,14 @@ void	ScalarConverter::toDoubleValue(const std::string &strValue) {
 	double	doubleValue_;
 	char	*endptr;
 	try {
-		if (strValue.size() != 1) {
-			throw ImpossibleException();
-		}
 		double	doubleValue = std::strtod(strValue.c_str(), &endptr);
 		if (*endptr == '\0' || *endptr == 'f') {
 			doubleValue_ = static_cast<double>(doubleValue);
 		}
 		else {
+			if (strValue.size() != 1) {
+				throw ImpossibleException();
+			}
 			doubleValue_ = *endptr;
 		}
 	}
