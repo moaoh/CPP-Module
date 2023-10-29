@@ -4,13 +4,11 @@
 #include <iostream>
 
 
-struct Data
-{
+struct Data {
 	std::string name;
-};	
+};
 
-class Serializer
-{
+class Serializer {
 public:
 	static uintptr_t serialize(Data* ptr);
 	static Data* deserialize(uintptr_t raw);

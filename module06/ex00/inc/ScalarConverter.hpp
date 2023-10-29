@@ -2,12 +2,11 @@
 #define SCALARCONVERTER_HPP_
 
 #include <iostream>
+#include <cmath>
 #include <limits>
 
-class ScalarConverter
-{
+class ScalarConverter {
 public:
-
 	static void 	convert(const std::string &value);
 
 	class NonDisplayableException : public std::exception {
