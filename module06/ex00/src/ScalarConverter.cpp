@@ -98,13 +98,19 @@ void	ScalarConverter::toFloatValue(const std::string &strValue) {
 		throw ImpossibleException();
 	}
 	if (doubleValue < INT_MIN || INT_MAX < doubleValue) {
-		throw OverflowsException();
+		if (!std::isinf(floatValue)) {
+			throw OverflowsException();
+		}
+	}
+	if (std::isnan(floatValue) || std::isinf(floatValue)) {
+		std::cout << std::showpos;
 	}
 	std::cout << floatValue;
-	if (!std::isnan(floatValue) && !std::isinf(floatValue)) {
+	if (floatValue - static_cast<int>(floatValue) == 0 && !std::isnan(floatValue) && !std::isinf(floatValue)) {
 		std::cout << ".0";
 	}
 	std::cout << 'f' << std::endl;
+	std::cout << std::noshowpos;
 }
 
 void	ScalarConverter::toDoubleValue(const std::string &strValue) {
@@ -125,10 +131,14 @@ void	ScalarConverter::toDoubleValue(const std::string &strValue) {
 	catch(...) {
 		throw ImpossibleException();
 	}
+	if (std::isnan(doubleValue_) || std::isinf(doubleValue_)) {
+		std::cout << std::showpos;
+	}
 	std::cout << doubleValue_;
-	if (!std::isnan(doubleValue_) && !std::isinf(doubleValue_)) {
+	if (doubleValue_ - static_cast<int>(doubleValue_) == 0 && !std::isnan(doubleValue_) && !std::isinf(doubleValue_)) {
 		std::cout << ".0";
 	}
+	std::cout << std::noshowpos;
 }
 
 void ScalarConverter::convert(const std::string &value) {
@@ -161,3 +171,8 @@ void ScalarConverter::convert(const std::string &value) {
 		std::cerr << e.what() << std::endl;
 	}
 }
+
+/*
+float : 4.2f, inff
+double : 4.2
+*/
