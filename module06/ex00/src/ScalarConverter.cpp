@@ -23,11 +23,12 @@ const char* ScalarConverter::OverflowsException::what() const throw() {
 void	ScalarConverter::toCharValue(const std::string &strValue) {
 	char	charValue;
 	char	*endptr;
+	double	doubleValue;
+	doubleValue = std::strtod(strValue.c_str(), &endptr);
+	if (doubleValue < 0 || 127 < doubleValue) {
+		throw OverflowsException();
+	}
 	try {
-		double	doubleValue = std::strtod(strValue.c_str(), &endptr);
-		if (doubleValue < 0 || 127 < doubleValue) {
-			throw ImpossibleException();
-		}
 		if (*endptr == '\0' || *endptr == 'f') {
 			if (std::isnan(doubleValue) || std::isinf(doubleValue)) {
 				throw ImpossibleException();
