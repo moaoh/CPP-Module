@@ -1,4 +1,4 @@
-NAME = Serializer
+NAME = readType
 
 INCLUDE_DIR = ./inc/
 
@@ -8,7 +8,6 @@ FLAG = -Wall -Wextra -Werror -std=c++98 -I $(INCLUDE_DIR)
 SRC_DIR = ./src/
 
 SRC = $(addprefix $(SRC_DIR)/, \
-	Serializer.cpp \
 	main.cpp \
 	)
 
@@ -43,4 +42,5 @@ fclean : clean
 	@$(RM) $(NAME)
 	@printf "$(CL_RED)💀 Erase $(CL_L_YELLOW)$(NAME)\n"
 
-re : all clean fclean
+re : fclean all
+
