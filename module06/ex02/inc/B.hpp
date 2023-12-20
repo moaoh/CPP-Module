@@ -3,9 +3,6 @@
 
 #include "Base.hpp"
 
-class B : public Base {
-public:
-private:
-};
+class B : public Base {};
 
 #endif
