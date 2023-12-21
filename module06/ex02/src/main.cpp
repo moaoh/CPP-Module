@@ -1,9 +1,9 @@
 #include <iostream>
 #include <ctime>
 
+#include "Base.hpp"
 #include "A.hpp"
 #include "B.hpp"
-#include "Base.hpp"
 #include "C.hpp"
 
 Base *generate(void) {
@@ -33,16 +33,24 @@ void identify(Base *p) {
 }
 
 void identify(Base& p) {
-  std::cout << "&p: ";
-  if (dynamic_cast<A *>(&p) != nullptr) {
-    std::cout << "A" << std::endl;
-	}
-  else if (dynamic_cast<B *>(&p) != nullptr) {
-    std::cout << "B" << std::endl;
-	}
-  else if (dynamic_cast<C *>(&p) != nullptr) {
-    std::cout << "C" << std::endl;
-	}
+  try {
+		A &a = dynamic_cast<A&>(p);
+    std::cout << "&p: A" << std::endl;
+		static_cast<void>(a);
+  }
+  catch (std::bad_cast) {}
+  try {
+		B &b = dynamic_cast<B&>(p);
+    std::cout << "&p: B" << std::endl;
+		static_cast<void>(b);
+  }
+  catch (std::bad_cast) {}
+  try {
+		C &c = dynamic_cast<C&>(p);
+    std::cout << "&p: C" << std::endl;
+		static_cast<void>(c);
+  }
+  catch (std::bad_cast) {}
 }
 
 int main(void) {
