@@ -20,7 +20,6 @@ Base *generate(void) {
 }
 
 void identify(Base *p) {
-  std::cout << "*p: ";
   if (dynamic_cast<A *>(p) != NULL) {
     std::cout << "A" << std::endl;
 	}
@@ -33,24 +32,30 @@ void identify(Base *p) {
 }
 
 void identify(Base& p) {
-  try {
-		A &a = dynamic_cast<A&>(p);
-    std::cout << "&p: A" << std::endl;
-		static_cast<void>(a);
+  if (dynamic_cast<A *>(&p) != nullptr) {
+    try {
+      A &a = dynamic_cast<A&>(p);
+      std::cout << "A" << std::endl;
+      static_cast<void>(a);
+    }
+    catch (std::bad_cast) {}
   }
-  catch (std::bad_cast) {}
-  try {
-		B &b = dynamic_cast<B&>(p);
-    std::cout << "&p: B" << std::endl;
-		static_cast<void>(b);
+  if (dynamic_cast<B *>(&p) != nullptr) {
+    try {
+      B &b = dynamic_cast<B&>(p);
+      std::cout << "B" << std::endl;
+      static_cast<void>(b);
+    }
+    catch (std::bad_cast) {}
   }
-  catch (std::bad_cast) {}
-  try {
-		C &c = dynamic_cast<C&>(p);
-    std::cout << "&p: C" << std::endl;
-		static_cast<void>(c);
+  if (dynamic_cast<C *>(&p) != nullptr) {
+    try {
+      C &c = dynamic_cast<C&>(p);
+      std::cout << "C" << std::endl;
+      static_cast<void>(c);
+    }
+    catch (std::bad_cast) {}
   }
-  catch (std::bad_cast) {}
 }
 
 int main(void) {
@@ -59,7 +64,9 @@ int main(void) {
   for (int i = 1; i <= 10; i++) {
     Base *p = generate();
     std::cout << "generate :" << i << std::endl;
+    std::cout << "*p: ";
     identify(p);
+    std::cout << "&p: ";
     identify(*p);
   }
 	return (0);
