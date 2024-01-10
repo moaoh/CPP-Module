@@ -6,13 +6,13 @@ int		main(void) {
 	float	floatArr[5] = {1.1, 2.2, 3.3, 4.4, 5.5};
 	const char	*charArr[5] = {"a", "b", "c", "d", "e"};
 
-	iter(intArr, sizeof(intArr) / sizeof(*intArr), print);
 	iter(intArr, sizeof(intArr) / sizeof(*intArr), print<int>);
-	iter<int>(intArr, sizeof(intArr) / sizeof(*intArr), print);
+	iter(intArr, sizeof(intArr) / sizeof(*intArr), print<int>);
+	iter<int>(intArr, sizeof(intArr) / sizeof(*intArr), print<int>);
 	iter<int>(intArr, sizeof(intArr) / sizeof(*intArr), print<int>);
 
 // another type =====
-	iter(floatArr, sizeof(floatArr) / sizeof(*floatArr), print);
-	iter(charArr, sizeof(charArr) / sizeof(*charArr), print);
+	iter(floatArr, sizeof(floatArr) / sizeof(*floatArr), print<float>);
+	iter(charArr, sizeof(charArr) / sizeof(*charArr), print<const char*>);
 	return (0);
 }
