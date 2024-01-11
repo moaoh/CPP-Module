@@ -35,8 +35,10 @@ public:
 		}
 		return *this;
 	}
-	
-	~Array() {};
+
+	~Array() {
+		delete[] this->array_;
+	}
 
 	class OutOfIndex : public std::exception {
 	public:
