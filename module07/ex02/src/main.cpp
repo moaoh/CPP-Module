@@ -51,6 +51,7 @@ int main(int, char**)
     for (int i = 0; i < numbers.size(); i++) {
         std::cout << numbers[i] << " ";
     }
+    std::cout << "size :" << numbers.size() << std::endl;
     delete [] mirror;//
     return 0;
 }
