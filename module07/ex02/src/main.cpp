@@ -48,6 +48,9 @@ int main(int, char**)
     {
         numbers[i] = rand();
     }
+    for (int i = 0; i < numbers.size(); i++) {
+        std::cout << numbers[i] << " ";
+    }
     delete [] mirror;//
     return 0;
 }

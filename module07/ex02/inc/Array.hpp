@@ -60,6 +60,10 @@ public:
 		}
 		return this->array_[index];
 	}
+
+	T size() {
+		return arraySize_;
+	}
 };
 
 #endif
