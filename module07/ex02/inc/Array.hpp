@@ -28,7 +28,7 @@ public:
 	}
 
 	Array &operator=(const Array& rhs) {
-		if (this == rhs) return *this;
+		if (this == &rhs) return *this;
 		this->array_ = new T[this->arraySize_];
 		for (unsigned int i = 0; i < this->arraySize_; i++) {
 			this->array_[i] = rhs.array_[i];

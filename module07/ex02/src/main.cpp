@@ -15,7 +15,8 @@ int main(int, char**)
     }
     //SCOPE
     {
-        Array<int> tmp = numbers;
+        Array<int> tmp;
+        tmp = numbers;
         Array<int> test(tmp);
     }
 
