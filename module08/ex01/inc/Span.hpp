@@ -7,8 +7,8 @@
 class Span
 {
 private:
-	unsigned int size_;
-	std::vector <int> values_;
+	unsigned int _size;
+	std::vector <int> _values;
 	Span();
 
 public:
@@ -17,25 +17,25 @@ public:
 	Span &operator=(Span const &rhs);
 	~Span();
 
-	unsigned int getSize() const;
+	unsigned int size() const;
 	std::vector<int> const &getValues() const;
 
 	void addNumber(int n);
+	void addNumber(std::vector<int>::iterator const &begin, std::vector<int>::iterator const &end);
 
-	// 숫자가 1개 or null is error
 	int shortestSpan() const;
 	int longestSpan() const;
 
-	class OutOfIndex : public std::exception {
-	public:
-		const char *what() const throw() {
-			return ("Out of index");
-		}
-	};
 	class FullException : public std::exception {
 	public:
 		const char *what() const throw() {
-			return ("Full vectors");
+			return ("vector is full.");
+		}
+	};
+	class CantSearchException : public std::exception {
+	public:
+		const char *what() const throw() {
+			return ("can't Search.");
 		}
 	};
 };
