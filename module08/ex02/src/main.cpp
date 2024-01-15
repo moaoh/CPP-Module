@@ -6,6 +6,7 @@
 
 int main()
 {
+	std::cout << "========== MutantStack ==========" << std::endl;
 	{
 		MutantStack<int> mstack;
 		mstack.push(5);
@@ -29,6 +30,7 @@ int main()
 		--it;
 		while (it != ite)
 		{
+			// *it = 0;
 			std::cout << *it << std::endl;
 			++it;
 		}
@@ -36,7 +38,6 @@ int main()
 	}
 
 	std::cout << "========== list ==========" << std::endl;
-
 	{
 		std::list<int> mstack;
 
@@ -65,6 +66,34 @@ int main()
 			++it;
 		}
 		std::list<int> s(mstack);
+	}
+	std::cout << "========== const_iterator ==========" << std::endl;
+	{
+		MutantStack<int> mstack;
+
+		mstack.push(5);
+		mstack.push(17);
+
+		std::cout << mstack.top() << std::endl;
+
+		mstack.pop();
+
+		std::cout << mstack.size() << std::endl;
+
+		mstack.push(3);
+		mstack.push(5);
+		mstack.push(737);
+		//[...] mstack.push(0);
+		MutantStack<int>::const_iterator it = mstack.begin();
+		MutantStack<int>::const_iterator ite = mstack.end();
+
+		++it;
+		--it;
+		while (it != ite) {
+			// *it = 0; // error
+			std::cout << *it << std::endl;
+			++it;
+		}
 	}
 	return 0;
 }
