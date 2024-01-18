@@ -41,8 +41,8 @@ void	BitcoinExchange::inBitcoinData() {
 		if (pos == std::string::npos || countOccurrences(line, ',') != 1) {
 			throw std::runtime_error("invalid csv file.");
 		}
-		std::string key = line.substr(0, pos);
 		char* endPtr;
+		std::string key = line.substr(0, pos);
 		double value = strtod(line.substr(pos + 1).c_str(), &endPtr);
 		this->_bitcoinData.insert(std::make_pair(key, value));
 	}
@@ -61,6 +61,22 @@ static bool hasExtension(const char* fileName, const char* extension) {
 	return std::strcmp(fileExtension, extension) == 0;
 }
 
+// 양수만 가능.
+// Error: not a positive number
+// int 범위를 넘는경우 Cut!
+// Error: too large a number.
+// 입력 값이 잘못된 경우 Cut!
+// Error: bad input => 2001-42-42
+static bool checkValidBuyline(double value) {
+		if (value < 0) {
+		throw std::runtime_error("not a positive number");
+	}
+	if (2147483647 < value || value < -2147483647) {
+		throw std::runtime_error("too large a number.");
+	}
+	return true;
+}
+
 // 확장자가 .txt인지 확인 필요. 
 void BitcoinExchange::runBuyList(std::string fileName) const {
 	std::cout << "Run Run" << std::endl;
@@ -73,8 +89,25 @@ void BitcoinExchange::runBuyList(std::string fileName) const {
 	}
 	std::string line;
 	while (std::getline(outFile, line)) {
-		std::cout << line << std::endl;
+		try {
+			std::size_t pos = line.find("|");
+			if (pos == std::string::npos || countOccurrences(line, '|') != 1) {
+				throw std::runtime_error("bad input => " + line);
+			}
+			char* endPtr;
+			std::string key = line.substr(0, pos);
+			double value = strtod(line.substr(pos + 1).c_str(), &endPtr);
+			checkValidBuyline(value);
+			std::map<std::string, double>::const_iterator it;
+			it = this->_bitcoinData.lower_bound(key);
+			if (it == this->_bitcoinData.begin() || it == this->_bitcoinData.end()) {
+				throw std::runtime_error("invalid value");
+			}
+			--it;
+			std::cout << key << "=> " << value << " = " << value * it->second << std::endl;
+		}
+		catch (const std::exception& e) {
+			std::cerr << "Error: " << e.what() << '\n';
+		}
 	}
-	// std::map<std::string, double>::iterator temp = std::upper_bound(this->_bitcoinData.begin(), this->_bitcoinData.end());
-	// std::cout << *temp << std::endl;
 }
