@@ -16,8 +16,9 @@ public:
 
 	// bitcoin의 정보를 map에 보관할 함수
 	void inBitcoinData();
+	void runInput(std::string fileName) const;
+	
 	std::map<std::string, double> getBitcoinData() const;
-	void runBuyList(std::string fileName) const;
 };
 
 #endif

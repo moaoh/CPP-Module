@@ -12,7 +12,7 @@ int	main(int ac, char** av) {
 		(void)av;
 		BitcoinExchange bitcoin;
 		bitcoin.inBitcoinData();
-		bitcoin.runBuyList(av[1]);
+		bitcoin.runInput(av[1]);
 	}
 	catch(const std::exception& e) {
 		std::cerr << "Error: " << e.what() << '\n';
