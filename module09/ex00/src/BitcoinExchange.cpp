@@ -67,8 +67,8 @@ static bool hasExtension(const char* fileName, const char* extension) {
 // Error: too large a number.
 // 입력 값이 잘못된 경우 Cut!
 // Error: bad input => 2001-42-42
-static bool checkValidBuyline(double value) {
-		if (value < 0) {
+static bool checkValidByline(double value) {
+	if (value < 0) {
 		throw std::runtime_error("not a positive number");
 	}
 	if (2147483647 < value || value < -2147483647) {
@@ -97,7 +97,7 @@ void BitcoinExchange::runBuyList(std::string fileName) const {
 			char* endPtr;
 			std::string key = line.substr(0, pos);
 			double value = strtod(line.substr(pos + 1).c_str(), &endPtr);
-			checkValidBuyline(value);
+			checkValidByline(value);
 			std::map<std::string, double>::const_iterator it;
 			it = this->_bitcoinData.lower_bound(key);
 			if (it == this->_bitcoinData.begin() || it == this->_bitcoinData.end()) {
