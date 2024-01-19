@@ -100,15 +100,7 @@ static bool isValidDate(std::string line, std::string key) {
 	}
 }
 
-// 양수만 가능.
-// Error: not a positive number
-// int 범위를 넘는경우 Cut!
-// Error: too large a number.
-// 입력 값이 잘못된 경우 Cut!
-// Error: bad input => 2001-42-42
-// time_value 
 static bool checkValidInputLine(std::string line, std::string &key, double &value) {
-	// TODO : date | value 형식따로 반례처리 필요.
 	std::size_t pos = line.find("|");
 	if (pos == std::string::npos || countOccurrences(line, '|') != 1) {
 		throw std::runtime_error("bad input => " + line);
@@ -126,7 +118,6 @@ static bool checkValidInputLine(std::string line, std::string &key, double &valu
 	return true;
 }
 
-// 확장자가 .txt인지 확인 필요. 
 void BitcoinExchange::runInput(std::string fileName) const {
 	std::ifstream outFile(fileName);
 	if (!outFile.is_open()) {
