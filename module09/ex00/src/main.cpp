@@ -9,7 +9,6 @@ int	main(int ac, char** av) {
 		if (ac != 2) {
 			throw std::runtime_error("could not open file.");
 		}
-		(void)av;
 		BitcoinExchange bitcoin;
 		bitcoin.inBitcoinData();
 		bitcoin.runInput(av[1]);
