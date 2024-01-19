@@ -49,7 +49,7 @@ int main(int, char**)
     {
         numbers[i] = rand();
     }
-    for (int i = 0; i < numbers.size(); i++) {
+    for (int i = 0; i < MAX_VAL; i++) {
         std::cout << numbers[i] << " ";
     }
     std::cout << "size :" << numbers.size() << std::endl;

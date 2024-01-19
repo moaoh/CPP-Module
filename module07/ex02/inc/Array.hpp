@@ -61,7 +61,7 @@ public:
 		return this->array_[index];
 	}
 
-	T size() {
+	unsigned int size() const {
 		return arraySize_;
 	}
 };
