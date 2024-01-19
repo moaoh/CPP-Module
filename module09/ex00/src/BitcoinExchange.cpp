@@ -30,6 +30,7 @@ static int countOccurrences(const std::string& str, char target) {
 	return count;
 }
 
+/*
 static bool hasExtension(const char* fileName, const char* extension) {
 	const char* dotPosition = std::strrchr(fileName, '.');
 	if (dotPosition == nullptr || dotPosition == fileName || *(dotPosition + 1) == '\0') {
@@ -38,6 +39,7 @@ static bool hasExtension(const char* fileName, const char* extension) {
 	const char* fileExtension = dotPosition + 1;
 	return std::strcmp(fileExtension, extension) == 0;
 }
+*/
 
 static int checkValidFirstLine(std::string line, std::string str) {
 	size_t pos = line.find(str);
@@ -122,9 +124,6 @@ void BitcoinExchange::runInput(std::string fileName) const {
 	std::ifstream outFile(fileName);
 	if (!outFile.is_open()) {
 		throw std::runtime_error("not open input file.");
-	}
-	if (!hasExtension(fileName.c_str(), "txt")) {
-		throw std::runtime_error("not file extension : .txt");
 	}
 	std::string line;
 	std::map<std::string, double>::const_iterator it;
