@@ -39,12 +39,24 @@ static bool hasExtension(const char* fileName, const char* extension) {
 	return std::strcmp(fileExtension, extension) == 0;
 }
 
+static int checkValidFirstLine(std::string line, std::string str) {
+	size_t pos = line.find(str);
+	if (pos == std::string::npos) {
+		return 1;
+	}
+	return 0;
+}
+
 void	BitcoinExchange::inBitcoinData() {
 	std::ifstream outFile("data.csv");
 	if (!outFile.is_open()) {
 		throw std::runtime_error("not open file. : data.csv");
 	}
 	std::string line;
+	std::getline(outFile, line);
+	if (checkValidFirstLine(line, "date,exchange_rate")) {
+		return throw std::runtime_error("invalid format file : date,exchange_rate");
+	}
 	while(std::getline(outFile, line)) {
 		std::size_t pos = line.find(",");
 		if (pos == std::string::npos || countOccurrences(line, ',') != 1) {
@@ -61,9 +73,9 @@ static bool isLeapYear(int year) {
     return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
 }
 
-static bool isValidDate(std::string key) {
+static bool isValidDate(std::string line, std::string key) {
 	if (countOccurrences(key, '-') != 2) {
-		throw std::runtime_error("bad input => " + key);
+		throw std::runtime_error("bad input => " + line);
 	}
 	int firstTarget = key.find("-");
 	int secondTarget = key.rfind("-");
@@ -72,17 +84,17 @@ static bool isValidDate(std::string key) {
 	int day = std::atoi(key.substr(secondTarget + 1).c_str());
 	const int daysInMonth[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 	if (year < 1000 || 10000 <= year || month < 1 || 12 < month || day < 1) {
-		throw std::runtime_error("bad input => " + key);
+		throw std::runtime_error("bad input => " + line);
 	}
 	if (month == 2 && isLeapYear(year)) {
 		if (day < 1 || 29 < day) {
-			throw std::runtime_error("bad input => " + key);
+			throw std::runtime_error("bad input => " + line);
 		}
 		return true;
 	}
 	else {
 		if (day < 1 || daysInMonth[month] < day) {
-			throw std::runtime_error("bad input => " + key);
+			throw std::runtime_error("bad input => " + line);
 		}
 		return true;
 	}
@@ -99,7 +111,7 @@ static bool checkValidInputLine(std::string line, std::string &key, double &valu
 	// TODO : date | value 형식따로 반례처리 필요.
 	std::size_t pos = line.find("|");
 	if (pos == std::string::npos || countOccurrences(line, '|') != 1) {
-		throw std::runtime_error("bad input => " + key);
+		throw std::runtime_error("bad input => " + line);
 	}
 	char* endPtr;
 	key = line.substr(0, pos);
@@ -110,7 +122,7 @@ static bool checkValidInputLine(std::string line, std::string &key, double &valu
 	if (2147483647 < value) {
 		throw std::runtime_error("too large a number.");
 	}
-	isValidDate(key);
+	isValidDate(line, key);
 	return true;
 }
 
@@ -124,27 +136,27 @@ void BitcoinExchange::runInput(std::string fileName) const {
 		throw std::runtime_error("not file extension : .txt");
 	}
 	std::string line;
+	std::map<std::string, double>::const_iterator it;
+	std::string key;
+	double value, res;
+
+	std::getline(outFile, line);
+	if (checkValidFirstLine(line, "date | value")) {
+		return throw std::runtime_error("invalid format file : date | value");
+	}
 	while (std::getline(outFile, line)) {
 		try {
-			std::map<std::string, double>::const_iterator it;
-			std::string key;
-			double value, res;
-
 			checkValidInputLine(line, key, value);
 			it = this->_bitcoinData.lower_bound(key);
 			if (it == this->_bitcoinData.begin()) {
-				throw std::runtime_error("invalid value");
+				throw std::runtime_error("invalid input => " + line);
 			}
 			--it;
 			res = value * (it->second);
-			std::cout << "value :" << value << std::endl;
-			std::cout << "it->second :" << it->second << std::endl;
-			std::cout << std::fixed << "res :" << res << std::endl;
-			// TODO : 소수점 정리필요.
 			if (2147483647 < res) {
 				throw std::runtime_error("over value | max : 2147483647");
 			}
-			std::cout << std::fixed << key << "=> " << value << " = " << res << std::endl;
+			std::cout << key << "=> " << value << " = " << res << std::endl;
 		}
 		catch (const std::exception& e) {
 			std::cerr << "Error: " << e.what() << '\n';
