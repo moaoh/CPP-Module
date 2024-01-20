@@ -6,7 +6,7 @@ int main(int ac, char **av)
 {
   try {
     if (ac != 2) {
-			throw std::runtime_error("could not text.");
+			throw std::runtime_error("Invalid input.");
     }
     RPN rpn;
     rpn.calculateRPN(av[1]);
