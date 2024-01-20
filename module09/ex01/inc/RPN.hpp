@@ -2,7 +2,7 @@
 #define RPN_HPP_
 
 #include <iostream>
-#include <queue>
+#include <stack>
 
 class RPN  {
 public:
@@ -11,20 +11,18 @@ public:
   RPN &operator=(RPN const &rhs);
   ~RPN();
 
-  void inData(std::string str);
-  void run();
+  void calculateRPN(std::string str);
 
-  std::queue<int> getValue() const;
-  std::queue<std::string> getOper() const;
-
-  void printValue() const;
-  void printOper() const;
+  std::stack<int> getValues() const;
+  long long int getSum() const;
+  void printValues() const;
 
 private:
-  std::queue<int> _value;
-  std::queue<std::string> _oper;
+  std::stack<int> _values;
+  long long int _sum;
 
-  void enqueueData(std::string &key);
+  void runStack(std::string &key);
+  int topPopValues();
 };
 
 #endif // !RPN_HPP_

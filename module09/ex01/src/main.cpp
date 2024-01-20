@@ -9,8 +9,8 @@ int main(int ac, char **av)
 			throw std::runtime_error("could not text.");
     }
     RPN rpn;
-    rpn.inData(av[1]);
-    rpn.run();
+    rpn.calculateRPN(av[1]);
+    std::cout << rpn.getSum() << std::endl;
   }
   catch (const std::exception& e) { 
 	  std::cerr << e.what() << '\n';

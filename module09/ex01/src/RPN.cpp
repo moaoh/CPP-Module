@@ -3,137 +3,124 @@
 
 #include "RPN.hpp"
 
-RPN::RPN() {}
+RPN::RPN() : _sum(0) {}
 
 RPN::RPN(RPN const &src) {
-  this->_value = src._value;
-  this->_oper = src._oper;
+  this->_values = src._values;
+  this->_sum = src._sum;
 }
 
 RPN &RPN::operator=(RPN const &rhs) {
   if (this == &rhs) {
     return *this;
   }
-  this->_value = rhs._value;
-  this->_oper = rhs._oper;
+  this->_values = rhs._values;
+  this->_sum = rhs._sum;
   return *this;
 }
 
 RPN::~RPN () {}
 
+static bool checkValidNum(std::string &key) {
+  const char *numbers[] = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
+  for (size_t i = 0; i < sizeof(numbers) / sizeof(numbers[0]); i++) {
+    if (key == numbers[i]) {
+      return true;
+    }
+  }
+  return false;
+}
+
+static bool checkValidOper(std::string &key) {
+  const char *operList[] = {"+", "-", "/", "*"};
+  for (size_t i = 0; i < sizeof(operList) / sizeof(operList[0]); i++) {
+    if (key == operList[i]) {
+      return true;
+    }
+  }
+  return false;
+}
+
 static void checkValidKey(std::string &key) {
   if (key.size() != 1) {
     throw std::runtime_error("Error");
   }
-  const char *value[] = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "+", "-", "/", "*"};
-  bool isCheck = false;
-  for (size_t i = 0; i < sizeof(value) / sizeof(value[0]); i++) {
-    if (key == value[i]) {
-      isCheck = true;
-    }
-  }
-  if (!isCheck) {
+  if (checkValidNum(key) == false && checkValidOper(key) == false) {
     throw std::runtime_error("Error");
   }
 }
 
-void RPN::enqueueData(std::string &key) {
-  const char *numbers[] = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
-  const char *operList[] = {"+", "-", "/", "*"};
+int RPN::topPopValues() {
+  int tmp = this->_values.top();
+  this->_values.pop();
+  return tmp;
+}
 
-  for (size_t i = 0; i < sizeof(numbers) / sizeof(numbers[0]); i++) {
-    if (key == numbers[i]) {
-      this->_value.push(std::atoi(key.c_str()));
-      return ;
+void RPN::runStack(std::string &key) {
+  if (checkValidOper(key)) {
+    if (this->_values.size() < 2) {
+      throw std::runtime_error("Error");
     }
-  }
-  for (size_t i = 0; i < sizeof(operList) / sizeof(operList[0]); i++) {
-    if (key == operList[i]) {
-      this->_oper.push(key);
-      return ;
+    long long int tmp1 = topPopValues();
+    long long int tmp2 = topPopValues();
+    long long int sum = 0;
+    if (key == "+") {
+      sum = tmp2 + tmp1;
+    } 
+    else if (key == "-") {
+      sum = tmp2 - tmp1;
+    } 
+    else if (key == "/") {
+      sum = tmp2 / tmp1;
+    } 
+    else if (key == "*") {
+      sum = tmp2 * tmp1;
     }
+    std::cout << "sum :" << sum << std::endl;
+    if (sum < -2147483647 || 2147483647 < sum) {
+      throw std::runtime_error("Error");
+    }
+    this->_values.push(sum);
   }
-  throw std::runtime_error("Error");
-}
-
-std::queue<int> RPN::getValue() const {
-  return this->_value;
-}
-
-std::queue<std::string> RPN::getOper() const {
-  return this->_oper;
-}
-
-void RPN::printValue() const {
-  std::queue<int> value = this->getValue();
-  while (!value.empty()) {
-      std::cout << "value :" << value.front() << std::endl;
-      value.pop();
+  else if (checkValidNum(key)) {
+    this->_values.push(std::atoi(key.c_str()));
+  }
+  else {
+    throw std::runtime_error("Error");
   }
 }
 
-void RPN::printOper() const {
-  std::queue<std::string> oper = this->getOper();
-  while (!oper.empty()) {
-    std::cout << "operator :" << oper.front() << std::endl;
-    oper.pop();
+std::stack<int> RPN::getValues() const {
+  return this->_values;
+}
+
+long long int RPN::getSum() const {
+  return this->_sum;
+}
+
+void RPN::printValues() const {
+  std::stack<int> values = this->getValues();
+  while (!values.empty()) {
+      std::cout << "value :" << values.top() << std::endl;
+      values.pop();
   }
 }
 
-void RPN::inData(std::string str) {
+void RPN::calculateRPN(std::string str) {
   while (true) {
     size_t pos = str.find(" ");
     std::string key = str.substr(0, pos);
     checkValidKey(key);
-    enqueueData(key);
+    runStack(key);
     if (pos == std::string::npos) {
       break;
     }
     str = str.substr(pos + 1);
   }
-}
-
-void RPN::run() {
-  long long int sum = 0;
-  std::string oper;
-  int value;
-  if (!this->_value.empty()) {
-    sum = _value.front();
-    this->_value.pop();
-  }
-  while (true) {
-    if (!this->_oper.empty()) {
-      oper = this->_oper.front();
-      this->_oper.pop();
-    } 
-    else {
-      break;
-    }
-    if (!this->_value.empty()) {
-      value = this->_value.front();
-      this->_value.pop();
-    } 
-    else {
-      break;
-    }
-    if (oper == "+") {
-      sum += value;
-    } 
-    else if (oper == "-") {
-      sum -= value;
-    } 
-    else if (oper == "/") {
-      sum /= value;
-    } 
-    else if (oper == "*") {
-      sum *= value;
-    }
-  } 
-  if (!this->_oper.empty() || !this->_value.empty()) {
+  if (this->_values.size() != 1) {
     throw std::runtime_error("Error");
-  } else {
-    std::cout << sum << std::endl;
   }
+  this->_sum = topPopValues();
 }
 
 // 1 2 2 2 2 4
