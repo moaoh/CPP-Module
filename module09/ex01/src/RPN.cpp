@@ -122,6 +122,3 @@ void RPN::calculateRPN(std::string str) {
   }
   this->_sum = topPopValues();
 }
-
-// 1 2 2 2 2 4
-// * / * - +
