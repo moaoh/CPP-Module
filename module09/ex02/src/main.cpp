@@ -12,10 +12,12 @@ int     main(int ac, char **av) {
     pmerg.inContainerData(ac, av);
     // isValidData : 유효성검사 및 각각 container에 저장.
     // first container loop (vector)
+    pmerg.mergeInsertionVector();
     // second container loop (deque)
+    pmerg.mergeInsertionDeque();
   }
   catch (const std::exception& e) { 
-      std::cerr << "Error: " << e.what() << '\n';
+    std::cerr << "Error: " << e.what() << '\n';
   }
   return (0);
 }
