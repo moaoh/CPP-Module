@@ -13,11 +13,15 @@ public:
   PmergeMe &operator=(PmergeMe const &rhs);
   ~PmergeMe();
 
-  void isValidData(std::string &data);
-  void inContainerData(std::string const *dataList);
+  void isValidData(const char *data);
+  void inContainerData(int size, char **datalist);
+
+  void fordJohsonVector();
+  void fordJohsonDeque();
+
 private:
-    std::vector<int> _vec;
-    std::deque<int> _de;
+    std::vector<int> _vector;
+    std::deque<int> _deque;
 };
 
 #endif
