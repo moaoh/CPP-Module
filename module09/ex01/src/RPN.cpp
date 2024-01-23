@@ -71,12 +71,14 @@ void RPN::runStack(std::string &key) {
       sum = tmp2 - tmp1;
     } 
     else if (key == "/") {
+      if (tmp1 == 0) {
+        throw std::runtime_error("Error");
+      }
       sum = tmp2 / tmp1;
     } 
     else if (key == "*") {
       sum = tmp2 * tmp1;
     }
-    std::cout << "sum :" << sum << std::endl;
     if (sum < -2147483647 || 2147483647 < sum) {
       throw std::runtime_error("Error");
     }
