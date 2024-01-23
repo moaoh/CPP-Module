@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <climits>
 
 #include "RPN.hpp"
 
@@ -79,7 +80,7 @@ void RPN::runStack(std::string &key) {
     else if (key == "*") {
       sum = tmp2 * tmp1;
     }
-    if (sum < -2147483647 || 2147483647 < sum) {
+    if (sum < INT_MIN || INT_MAX < sum) {
       throw std::runtime_error("Error");
     }
     this->_values.push(sum);
