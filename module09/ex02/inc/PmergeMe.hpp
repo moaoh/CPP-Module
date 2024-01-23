@@ -20,7 +20,7 @@ double sort(Container &container) {
   clock_t startTime = clock();
   mergeInsertion(container);
   clock_t endTime = clock();
-  double elapsedTime = static_cast<double>(endTime - startTime) / CLOCKS_PER_SEC;
+  double elapsedTime = static_cast<double>(endTime - startTime) * 1000000 / CLOCKS_PER_SEC;
   return (elapsedTime);
 }
 

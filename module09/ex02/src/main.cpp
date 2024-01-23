@@ -18,8 +18,10 @@ int     main(int ac, char **av) {
 
 	std::cout << "Before: ";
 	show(vecOriginalData);
+
 	double elapsedVec = sort(vecData);
 	double elapsedDe = sort(deData);
+	
 	std::cout << "After: ";
 	show(vecData);
 

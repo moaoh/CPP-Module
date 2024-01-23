@@ -166,5 +166,5 @@ void sentenceOutput(size_t size, std::string type, double elapsed) {
   std::cout \
     << std::fixed << "Time to process a range of " \
     << size << " elements with " << type << " : " \
-    << elapsed << "us" << std::endl;
+    << elapsed << " us" << std::endl;
 }
