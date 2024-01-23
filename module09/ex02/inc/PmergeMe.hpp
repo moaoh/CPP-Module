@@ -4,35 +4,48 @@
 #include <iostream>
 #include <vector>
 #include <deque>
+#include <ctime>
 
-class PmergeMe
-{
-public:
-  PmergeMe();
-  PmergeMe(PmergeMe const &src);
-  PmergeMe &operator=(PmergeMe const &rhs);
-  ~PmergeMe();
+int isValidData(const char *data);
 
-  void isValidData(const char *data);
-  void inContainerData(int size, char **datalist);
+void mergeInsertion(std::vector<int> &);
+void mergeInsertion(std::deque<int> &);
 
-  void mergeInsertion() const;
-  void mergeInsertionVector() const;
-  void mergeInsertionDeque() const;
 
-  void inVectorOriginalData(const char *data);
+template <typename Container>
+double sort(Container &container) {
+  if (container.size() == 1) {
+    return 0;
+  }
+  clock_t startTime = clock();
+  mergeInsertion(container);
+  clock_t endTime = clock();
+  double elapsedTime = static_cast<double>(endTime - startTime) / CLOCKS_PER_SEC;
+  return (elapsedTime);
+}
 
-  std::vector<int> const getVectorData() const;
-  std::deque<int> const getDequeData() const;
+void sentenceOutput(size_t size, std::string type, double elapsed);
 
-  void printVectorData() const;
-  void printDequeData() const;
-  void printVectorOriginalData() const;
+template <typename Container>
+Container inContainerData(int size, char **datalist) {
 
-private:
-  std::vector<int> _vectorOriginalData;
-  std::vector<int> _vectorData;
-  std::deque<int> _dequeData;
-};
+  Container Data;
+  for (int i = 0; i < size; i++) {
+    Data.push_back(isValidData(datalist[i]));
+  }
+  return (Data);
+}
+
+template <typename T>
+void show(const T& container) {
+  typename T::const_iterator  it;
+  for (it = container.begin(); it != container.end(); it++) {
+		if (it != container.begin()) {
+			std::cout << " ";
+    }
+		std::cout << *it;
+  }
+  std::cout << std::endl;
+}
 
 #endif
