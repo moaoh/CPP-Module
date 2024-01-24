@@ -123,7 +123,6 @@ void mergeInsertion(std::vector<int> &arr, int nodeSize) {
     std::vector<int> group(arr.begin() + i, arr.begin() + std::min(i + nodeSize, arr.size()));
     groupedVec.push_back(group);
   }
-  std::cout << std::endl;
   for (size_t i = 0; i < groupedVec.size(); i++) {
     moveLargestToFirst<std::vector<int> >(groupedVec[i]);
   }
@@ -186,7 +185,6 @@ void mergeInsertion(std::vector<int> &arr, int nodeSize) {
   std::vector<int>::iterator iter = arr.begin();
   for (size_t i = 0; i < win.size(); i++) {
     for (size_t j = 0; j < win[i].size(); j++) {
-      std::cout << win[i][j] << " ";
       *iter = win[i][j];
       *iter++;
     }
@@ -211,7 +209,6 @@ void mergeInsertion(std::deque<int> &arr, int nodeSize) {
     std::deque<int> group(arr.begin() + i, arr.begin() + std::min(i + nodeSize, arr.size()));
     groupedVec.push_back(group);
   }
-  std::cout << std::endl;
   for (size_t i = 0; i < groupedVec.size(); i++) {
     moveLargestToFirst<std::deque<int> >(groupedVec[i]);
   }
@@ -274,7 +271,6 @@ void mergeInsertion(std::deque<int> &arr, int nodeSize) {
   std::deque<int>::iterator iter = arr.begin();
   for (size_t i = 0; i < win.size(); i++) {
     for (size_t j = 0; j < win[i].size(); j++) {
-      std::cout << win[i][j] << " ";
       *iter = win[i][j];
       *iter++;
     }
@@ -290,8 +286,8 @@ void mergeInsertionSort(std::vector<int> &arr, int depth, int nodeSize) {
 }
 
 void mergeInsertionSort(std::deque<int> &arr, int depth, int nodeSize) {
-  mergeInsertion(arr, nodeSize);
-  if (depth <= 0) {
+  mergeInsertion(arr, nodeSize); 
+  if (depth == 1) {
     return ;
   }
   mergeInsertionSort(arr, depth - 1, nodeSize / 2);
