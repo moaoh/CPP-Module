@@ -8,8 +8,11 @@
 
 int isValidData(const char *data);
 
-void mergeInsertion(std::vector<int> &);
+void mergeInsertion(std::vector<int> &, int low, int hgih);
 void mergeInsertion(std::deque<int> &);
+
+void mergeInsertionSort(std::vector<int> &, int low, int high);
+void mergeInsertionSort(std::deque<int> &, int low, int high);
 
 
 template <typename Container>
@@ -18,7 +21,7 @@ double sort(Container &container) {
     return 0;
   }
   clock_t startTime = clock();
-  mergeInsertion(container);
+  mergeInsertionSort(container, 0, container.size() - 1);
   clock_t endTime = clock();
   double elapsedTime = static_cast<double>(endTime - startTime) * 1000000 / CLOCKS_PER_SEC;
   return (elapsedTime);

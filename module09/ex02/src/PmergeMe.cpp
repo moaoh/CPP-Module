@@ -1,6 +1,7 @@
 #include <iostream>
 #include <limits>
 #include <algorithm>
+#include <vector>
 
 #include "PmergeMe.hpp"
 
@@ -53,20 +54,26 @@ static void binarySearch(container& arr, int temp) {
   arr.insert(arr.begin() + low, temp);
 }
 
-void mergeInsertion(std::vector<int> &arr) {
+void mergeInsertion(std::vector<int> &arr, int low, int high) {
   int temp = 0;
 
+  std::cout << "arr.size() :" << arr.size() << std::endl;
+  for (int i = low; i < high; i++) {
+    std::cout << arr[i] << " ";
+  }
+  std::cout << "\n";
   // 홀수면 남는 값 따로 뺴기.
-  if (arr.size() % 2 != 0) {
-    temp = arr.back();
-    arr.pop_back();
+  if ((high - low) % 2 != 0) {
+    temp = arr[high + 1];
+    high--;
   }
   
   // 2개씩 묶어서 pair에 저장.
   std::vector<std::pair<int, int> > pairList;
-  for (size_t i = 0; i < arr.size(); i += 2) {
+  for (int i = low; i < high; i += 2) {
     pairList.push_back(std::make_pair(arr[i], arr[i + 1]));
   }
+
 
   // pair중 큰 수를 first로.
   for (size_t i = 0; i < pairList.size(); i++) {
@@ -86,6 +93,7 @@ void mergeInsertion(std::vector<int> &arr) {
     pairList[j] = key;
   }
 
+
   std::vector<int> win;
   std::vector<int> lose;
   for (size_t i = 0; i < pairList.size(); i++) {
@@ -101,24 +109,36 @@ void mergeInsertion(std::vector<int> &arr) {
       binarySearch(win, lose[j]);
     }
   }
+
   if (temp != 0) {
     binarySearch(win, temp);
   }
-  arr = win;
+
+  std::cout << "win : ";
+  for (size_t i = 0; i < win.size(); i++) {
+    std::cout << win[i] << " ";
+  }
+  std::cout << std::endl;
+
+  std::vector<int>::iterator iter = arr.begin() + low;
+  for (std::vector<int>::iterator winIter = win.begin(); winIter != win.end(); winIter++) {
+    *iter = *winIter;
+    *iter++;
+  }
 }
 
-void mergeInsertion(std::deque<int> &arr) {
+void mergeInsertion(std::deque<int> &arr, int low, int high) {
   int temp = 0;
 
   // 홀수면 남는 값 따로 뺴기.
-  if (arr.size() % 2 != 0) {
-    temp = arr.back();
-    arr.pop_back();
+  if ((high - low) % 2 != 0) {
+    temp = arr[high + 1];
+    high--;
   }
   
   // 2개씩 묶어서 pair에 저장.
   std::deque<std::pair<int, int> > pairList;
-  for (size_t i = 0; i < arr.size(); i += 2) {
+  for (int i = low; i < high; i += 2) {
     pairList.push_back(std::make_pair(arr[i], arr[i + 1]));
   }
 
@@ -159,7 +179,81 @@ void mergeInsertion(std::deque<int> &arr) {
   if (temp != 0) {
     binarySearch(win, temp);
   }
-  arr = win;
+  
+  std::deque<int>::iterator iter = arr.begin() + low;
+  for (std::deque<int>::iterator winIter = win.begin(); winIter != win.end(); winIter++) {
+    *iter = *winIter;
+    *iter++;
+  }
+}
+
+template <typename container>
+static void mergeSort(container &arr, int low, int mid, int high) {
+  int n1 = mid - low + 1;
+  int n2 = high - mid;
+
+  container left(n1);
+  container right(n2);
+  
+  for (int i = 0; i < n1; i++) {
+    left[i] = arr[low + i];
+  }
+  for (int i = 0; i < n2; i++) {
+    right[i] = arr[mid + 1 + i];
+  }
+
+  int i = 0;
+  int j = 0;
+  int k = low;
+
+  while (i < n1 && j < n2) {
+    if (left[i] <= right[j]) {
+      arr[k] = left[i];
+      i++;
+    } else {
+      arr[k] = right[j];
+      j++;
+    }
+    k++;
+  }
+
+  while (i < n1) {
+    arr[k] = left[i];
+    i++;
+    k++;
+  }
+
+  while (j < n2) {
+    arr[k] = right[j];
+    j++;
+    k++;
+  }
+}
+
+void mergeInsertionSort(std::vector<int> &arr, int low, int high)
+{
+  if (2 <= high - low + 1) {
+    mergeInsertion(arr, low, high);
+  } 
+  else if (low < high) {
+    int mid = (low + high) / 2;
+    mergeInsertionSort(arr, low, mid);
+    mergeInsertionSort(arr, mid + 1, high);
+    mergeSort(arr, low, mid, high);
+  }
+}
+
+void mergeInsertionSort(std::deque<int> &arr, int low, int high)
+{
+  if (2 <= high - low + 1) {
+    mergeInsertion(arr, low, high);
+  } 
+  else if (low < high) {
+    int mid = (low + high) / 2;
+    mergeInsertionSort(arr, low, mid);
+    mergeInsertionSort(arr, mid + 1, high);
+    mergeSort(arr, low, mid, high);
+  }
 }
 
 void sentenceOutput(size_t size, std::string type, double elapsed) {
