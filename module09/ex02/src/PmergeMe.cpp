@@ -106,27 +106,27 @@ static void moveLargestToFirst(container& vec) {
 }
 
 void mergeInsertion(std::vector<int> &arr, int nodeSize) {
-  if (static_cast<int>(arr.size()) < nodeSize || (arr.size() / nodeSize) < 2) {
+  if ((arr.size() / nodeSize) < 2) {
     return ;
   }
-  // 홀수면 남는 값 따로 뺴기.
+  int arrSize = arr.size();
   std::vector<int> tempVec;
   if (arr.size() % nodeSize != 0) {
     int restValueSize = (arr.size() % nodeSize);
-    tempVec.insert(tempVec.begin(), arr.begin() + restValueSize, arr.end());
-    arr.erase(arr.begin(), arr.end() - restValueSize);
+    tempVec.insert(tempVec.begin(), arr.end() - restValueSize, arr.end());
+    arrSize = arrSize - restValueSize;
   }
 
   // nodeSize 개수 씩 묶어 groupedVec에 저장.
   std::vector<std::vector<int> > groupedVec;
-  for (size_t i = 0; i < arr.size(); i += nodeSize) {
-    std::vector<int> group(arr.begin() + i, arr.begin() + std::min(i + nodeSize, arr.size()));
+  for (int i = 0; i < arrSize; i += nodeSize) {
+    std::vector<int> group(arr.begin() + i, arr.begin() + std::min(i + nodeSize, arrSize));
     groupedVec.push_back(group);
   }
   for (size_t i = 0; i < groupedVec.size(); i++) {
     moveLargestToFirst<std::vector<int> >(groupedVec[i]);
   }
-  
+
   // groupedVec들을 pair로 바꾸어 저장할 누군가가 필요.
   std::vector<std::vector<int> > remainerVec;
   if (groupedVec.size() % 2 != 0) {
@@ -139,7 +139,6 @@ void mergeInsertion(std::vector<int> &arr, int nodeSize) {
   }
 
   // 큰 수 기준으로 정렬.
-  // 일단 보류
   // pair들중 큰 값을 first로 변경.
   for(size_t i = 0; i < pairList.size(); i++) {
     if (pairList[i].first.front() < pairList[i].second.front()) {
@@ -170,7 +169,7 @@ void mergeInsertion(std::vector<int> &arr, int nodeSize) {
     remainerVec.pop_back();
   }
 
-  std::vector<size_t> jacobsthalArr = getJacobsthal<std::vector<size_t> >(arr.size() + 1);
+  std::vector<size_t> jacobsthalArr = getJacobsthal<std::vector<size_t> >(arrSize);
   for (size_t i = 1; i < jacobsthalArr.size(); i++) {
     int max = std::min(jacobsthalArr[i], lose.size());
     int min = jacobsthalArr[i - 1];
@@ -178,7 +177,8 @@ void mergeInsertion(std::vector<int> &arr, int nodeSize) {
       binarySearch(win, lose[j]);
     }
   }
-  if (tempVec.empty() != 0) {
+
+  if (!tempVec.empty()) {
     binarySearch(win, tempVec);
   }
 
@@ -186,33 +186,33 @@ void mergeInsertion(std::vector<int> &arr, int nodeSize) {
   for (size_t i = 0; i < win.size(); i++) {
     for (size_t j = 0; j < win[i].size(); j++) {
       *iter = win[i][j];
-      *iter++;
+      ++iter;
     }
   }
 }
 
 void mergeInsertion(std::deque<int> &arr, int nodeSize) {
-  if (static_cast<int>(arr.size()) < nodeSize || (arr.size() / nodeSize) < 2) {
+  if ((arr.size() / nodeSize) < 2) {
     return ;
   }
-  // 홀수면 남는 값 따로 뺴기.
+  int arrSize = arr.size();
   std::deque<int> tempVec;
   if (arr.size() % nodeSize != 0) {
     int restValueSize = (arr.size() % nodeSize);
-    tempVec.insert(tempVec.begin(), arr.begin() + restValueSize, arr.end());
-    arr.erase(arr.begin(), arr.end() - restValueSize);
+    tempVec.insert(tempVec.begin(), arr.end() - restValueSize, arr.end());
+    arrSize = arrSize - restValueSize;
   }
 
   // nodeSize 개수 씩 묶어 groupedVec에 저장.
   std::deque<std::deque<int> > groupedVec;
-  for (size_t i = 0; i < arr.size(); i += nodeSize) {
-    std::deque<int> group(arr.begin() + i, arr.begin() + std::min(i + nodeSize, arr.size()));
+  for (int i = 0; i < arrSize; i += nodeSize) {
+    std::deque<int> group(arr.begin() + i, arr.begin() + std::min(i + nodeSize, arrSize));
     groupedVec.push_back(group);
   }
   for (size_t i = 0; i < groupedVec.size(); i++) {
     moveLargestToFirst<std::deque<int> >(groupedVec[i]);
   }
-  
+
   // groupedVec들을 pair로 바꾸어 저장할 누군가가 필요.
   std::deque<std::deque<int> > remainerVec;
   if (groupedVec.size() % 2 != 0) {
@@ -223,9 +223,8 @@ void mergeInsertion(std::deque<int> &arr, int nodeSize) {
   for (size_t i = 0; i < groupedVec.size(); i += 2) {
     pairList.push_back(std::make_pair(groupedVec[i], groupedVec[i + 1]));
   }
-
+  
   // 큰 수 기준으로 정렬.
-  // 일단 보류
   // pair들중 큰 값을 first로 변경.
   for(size_t i = 0; i < pairList.size(); i++) {
     if (pairList[i].first.front() < pairList[i].second.front()) {
@@ -256,7 +255,7 @@ void mergeInsertion(std::deque<int> &arr, int nodeSize) {
     remainerVec.pop_back();
   }
 
-  std::deque<size_t> jacobsthalArr = getJacobsthal<std::deque<size_t> >(arr.size() + 1);
+  std::deque<size_t> jacobsthalArr = getJacobsthal<std::deque<size_t> >(arrSize);
   for (size_t i = 1; i < jacobsthalArr.size(); i++) {
     int max = std::min(jacobsthalArr[i], lose.size());
     int min = jacobsthalArr[i - 1];
@@ -264,7 +263,8 @@ void mergeInsertion(std::deque<int> &arr, int nodeSize) {
       binarySearch(win, lose[j]);
     }
   }
-  if (tempVec.empty() != 0) {
+
+  if (!tempVec.empty()) {
     binarySearch(win, tempVec);
   }
 
@@ -272,7 +272,7 @@ void mergeInsertion(std::deque<int> &arr, int nodeSize) {
   for (size_t i = 0; i < win.size(); i++) {
     for (size_t j = 0; j < win[i].size(); j++) {
       *iter = win[i][j];
-      *iter++;
+      ++iter;
     }
   }
 }
