@@ -5,7 +5,7 @@
 #include "PmergeMe.hpp"
 
 // 음수 불가능.
-// 소수점이 존재하는 경우 불가능. ex O : 12.0 | X : 12.5
+// 소수점이 존재하는 경우 불가능. ex | X : 12.5
 // ./PmergeMe 3 55 9 7 4 : O
 // ./PmergeMe "3 55 9 7 4" : X
 int isValidData(const char *data) {
