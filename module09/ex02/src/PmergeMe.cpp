@@ -54,51 +54,121 @@ static void binarySearch(container& arr, int temp) {
   arr.insert(arr.begin() + low, temp);
 }
 
-void mergeInsertion(std::vector<int> &arr, int low, int high) {
-  int temp = 0;
-
-  std::cout << "arr.size() :" << arr.size() << std::endl;
-  for (int i = low; i < high; i++) {
-    std::cout << arr[i] << " ";
+static void binarySearch(std::deque< std::deque<int> >& arr, std::deque<int> temp) {
+  int low = 0;
+  int high = arr.size() - 1;
+  while (low <= high) {
+    int mid = (low + high) / 2;
+    if (temp < arr[mid]) {
+      high = mid - 1;
+    }
+    else if (temp >= arr[mid]) {
+      low = mid + 1;
+    }
   }
-  std::cout << "\n";
+  arr.insert(arr.begin() + low, temp);
+}
+
+static void binarySearch(std::vector< std::vector<int> >& arr, std::vector<int> temp) {
+  int low = 0;
+  int high = arr.size() - 1;
+  while (low <= high) {
+    int mid = (low + high) / 2;
+    if (temp < arr[mid]) {
+      high = mid - 1;
+    }
+    else if (temp >= arr[mid]) {
+      low = mid + 1;
+    }
+  }
+  arr.insert(arr.begin() + low, temp);
+}
+
+template <typename container>
+static void moveLargestToFirst(container& vec) {
+    if (vec.empty()) {
+        // 벡터가 비어있으면 아무것도 할 필요가 없음
+        return;
+    }
+
+    // 가장 큰 값을 찾기 위한 반복문
+    size_t indexOfLargest = 0;
+    for (size_t i = 1; i < vec.size(); ++i) {
+        if (vec[i] > vec[indexOfLargest]) {
+            indexOfLargest = i;
+        }
+    }
+
+    // 가장 큰 값을 [0] 위치로 이동
+    if (indexOfLargest != 0) {
+        std::swap(vec[0], vec[indexOfLargest]);
+    }
+}
+
+void mergeInsertion(std::vector<int> &arr, int nodeSize) {
+  if (static_cast<int>(arr.size()) < nodeSize || (arr.size() / nodeSize) < 2) {
+    return ;
+  }
   // 홀수면 남는 값 따로 뺴기.
-  if ((high - low) % 2 != 0) {
-    temp = arr[high + 1];
-    high--;
+  std::vector<int> tempVec;
+  if (arr.size() % nodeSize != 0) {
+    int restValueSize = (arr.size() % nodeSize);
+    tempVec.insert(tempVec.begin(), arr.begin() + restValueSize, arr.end());
+    arr.erase(arr.begin(), arr.end() - restValueSize);
+  }
+
+  // nodeSize 개수 씩 묶어 groupedVec에 저장.
+  std::vector<std::vector<int> > groupedVec;
+  for (size_t i = 0; i < arr.size(); i += nodeSize) {
+    std::vector<int> group(arr.begin() + i, arr.begin() + std::min(i + nodeSize, arr.size()));
+    groupedVec.push_back(group);
+  }
+  std::cout << std::endl;
+  for (size_t i = 0; i < groupedVec.size(); i++) {
+    moveLargestToFirst<std::vector<int> >(groupedVec[i]);
   }
   
-  // 2개씩 묶어서 pair에 저장.
-  std::vector<std::pair<int, int> > pairList;
-  for (int i = low; i < high; i += 2) {
-    pairList.push_back(std::make_pair(arr[i], arr[i + 1]));
+  // groupedVec들을 pair로 바꾸어 저장할 누군가가 필요.
+  std::vector<std::vector<int> > remainerVec;
+  if (groupedVec.size() % 2 != 0) {
+    remainerVec.push_back(groupedVec.back());
+    groupedVec.pop_back();
+  }
+  std::vector<std::pair<std::vector<int>, std::vector<int> > > pairList;
+  for (size_t i = 0; i < groupedVec.size(); i += 2) {
+    pairList.push_back(std::make_pair(groupedVec[i], groupedVec[i + 1]));
   }
 
-
-  // pair중 큰 수를 first로.
-  for (size_t i = 0; i < pairList.size(); i++) {
-    if (pairList[i].first < pairList[i].second) {
+  // 큰 수 기준으로 정렬.
+  // 일단 보류
+  // pair들중 큰 값을 first로 변경.
+  for(size_t i = 0; i < pairList.size(); i++) {
+    if (pairList[i].first.front() < pairList[i].second.front()) {
       std::swap(pairList[i].first, pairList[i].second);
     }
   }
 
-  // 큰 수 기준으로 정렬.
+  // pairList front중 큰값을 기준으로 정렬
+  // 일단 보류 (로직이 맞는지 확인 못함.)
   for(size_t i = 1; i < pairList.size(); i++) {
-    std::pair<int, int> key = pairList[i];
+    std::vector<int> key = pairList[i].first;
     size_t j = i;
-    while (0 < j && pairList[j - 1] > key) {
+    while (0 < j && pairList[j - 1].first.front() > key.front()) {
       pairList[j] = pairList[j - 1];
       j--;
     }
-    pairList[j] = key;
+    pairList[j].first = key;
   }
-
-
-  std::vector<int> win;
-  std::vector<int> lose;
+  
+  std::vector<std::vector<int> > win;
+  std::vector<std::vector<int> > lose;
   for (size_t i = 0; i < pairList.size(); i++) {
     win.push_back(pairList[i].first);
     lose.push_back(pairList[i].second);
+  }
+  if (!remainerVec.empty()) {
+    lose.push_back(remainerVec.back());
+    remainerVec.pop_back();
   }
 
   std::vector<size_t> jacobsthalArr = getJacobsthal<std::vector<size_t> >(arr.size() + 1);
@@ -109,65 +179,86 @@ void mergeInsertion(std::vector<int> &arr, int low, int high) {
       binarySearch(win, lose[j]);
     }
   }
-
-  if (temp != 0) {
-    binarySearch(win, temp);
+  if (tempVec.empty() != 0) {
+    binarySearch(win, tempVec);
   }
 
-  std::cout << "win : ";
+  std::vector<int>::iterator iter = arr.begin();
   for (size_t i = 0; i < win.size(); i++) {
-    std::cout << win[i] << " ";
-  }
-  std::cout << std::endl;
-
-  std::vector<int>::iterator iter = arr.begin() + low;
-  for (std::vector<int>::iterator winIter = win.begin(); winIter != win.end(); winIter++) {
-    *iter = *winIter;
-    *iter++;
+    for (size_t j = 0; j < win[i].size(); j++) {
+      std::cout << win[i][j] << " ";
+      *iter = win[i][j];
+      *iter++;
+    }
   }
 }
 
-void mergeInsertion(std::deque<int> &arr, int low, int high) {
-  int temp = 0;
-
+void mergeInsertion(std::deque<int> &arr, int nodeSize) {
+  if (static_cast<int>(arr.size()) < nodeSize || (arr.size() / nodeSize) < 2) {
+    return ;
+  }
   // 홀수면 남는 값 따로 뺴기.
-  if ((high - low) % 2 != 0) {
-    temp = arr[high + 1];
-    high--;
+  std::deque<int> tempVec;
+  if (arr.size() % nodeSize != 0) {
+    int restValueSize = (arr.size() % nodeSize);
+    tempVec.insert(tempVec.begin(), arr.begin() + restValueSize, arr.end());
+    arr.erase(arr.begin(), arr.end() - restValueSize);
+  }
+
+  // nodeSize 개수 씩 묶어 groupedVec에 저장.
+  std::deque<std::deque<int> > groupedVec;
+  for (size_t i = 0; i < arr.size(); i += nodeSize) {
+    std::deque<int> group(arr.begin() + i, arr.begin() + std::min(i + nodeSize, arr.size()));
+    groupedVec.push_back(group);
+  }
+  std::cout << std::endl;
+  for (size_t i = 0; i < groupedVec.size(); i++) {
+    moveLargestToFirst<std::deque<int> >(groupedVec[i]);
   }
   
-  // 2개씩 묶어서 pair에 저장.
-  std::deque<std::pair<int, int> > pairList;
-  for (int i = low; i < high; i += 2) {
-    pairList.push_back(std::make_pair(arr[i], arr[i + 1]));
+  // groupedVec들을 pair로 바꾸어 저장할 누군가가 필요.
+  std::deque<std::deque<int> > remainerVec;
+  if (groupedVec.size() % 2 != 0) {
+    remainerVec.push_back(groupedVec.back());
+    groupedVec.pop_back();
+  }
+  std::deque<std::pair<std::deque<int>, std::deque<int> > > pairList;
+  for (size_t i = 0; i < groupedVec.size(); i += 2) {
+    pairList.push_back(std::make_pair(groupedVec[i], groupedVec[i + 1]));
   }
 
-  // pair중 큰 수를 first로.
-  for (size_t i = 0; i < pairList.size(); i++) {
-    if (pairList[i].first < pairList[i].second) {
+  // 큰 수 기준으로 정렬.
+  // 일단 보류
+  // pair들중 큰 값을 first로 변경.
+  for(size_t i = 0; i < pairList.size(); i++) {
+    if (pairList[i].first.front() < pairList[i].second.front()) {
       std::swap(pairList[i].first, pairList[i].second);
     }
   }
 
-  // 큰 수 기준으로 정렬.
+  // pairList front중 큰값을 기준으로 정렬
+  // 일단 보류 (로직이 맞는지 확인 못함.)
   for(size_t i = 1; i < pairList.size(); i++) {
-    std::pair<int, int> key = pairList[i];
+    std::deque<int> key = pairList[i].first;
     size_t j = i;
-    while (0 < j && pairList[j - 1] > key) {
+    while (0 < j && pairList[j - 1].first.front() > key.front()) {
       pairList[j] = pairList[j - 1];
       j--;
     }
-    pairList[j] = key;
+    pairList[j].first = key;
   }
-
-  std::deque<int> win;
-  std::deque<int> lose;
+  
+  std::deque<std::deque<int> > win;
+  std::deque<std::deque<int> > lose;
   for (size_t i = 0; i < pairList.size(); i++) {
     win.push_back(pairList[i].first);
     lose.push_back(pairList[i].second);
   }
+  if (!remainerVec.empty()) {
+    lose.push_back(remainerVec.back());
+    remainerVec.pop_back();
+  }
 
-  // binary search part.
   std::deque<size_t> jacobsthalArr = getJacobsthal<std::deque<size_t> >(arr.size() + 1);
   for (size_t i = 1; i < jacobsthalArr.size(); i++) {
     int max = std::min(jacobsthalArr[i], lose.size());
@@ -176,84 +267,34 @@ void mergeInsertion(std::deque<int> &arr, int low, int high) {
       binarySearch(win, lose[j]);
     }
   }
-  if (temp != 0) {
-    binarySearch(win, temp);
-  }
-  
-  std::deque<int>::iterator iter = arr.begin() + low;
-  for (std::deque<int>::iterator winIter = win.begin(); winIter != win.end(); winIter++) {
-    *iter = *winIter;
-    *iter++;
-  }
-}
-
-template <typename container>
-static void mergeSort(container &arr, int low, int mid, int high) {
-  int n1 = mid - low + 1;
-  int n2 = high - mid;
-
-  container left(n1);
-  container right(n2);
-  
-  for (int i = 0; i < n1; i++) {
-    left[i] = arr[low + i];
-  }
-  for (int i = 0; i < n2; i++) {
-    right[i] = arr[mid + 1 + i];
+  if (tempVec.empty() != 0) {
+    binarySearch(win, tempVec);
   }
 
-  int i = 0;
-  int j = 0;
-  int k = low;
-
-  while (i < n1 && j < n2) {
-    if (left[i] <= right[j]) {
-      arr[k] = left[i];
-      i++;
-    } else {
-      arr[k] = right[j];
-      j++;
+  std::deque<int>::iterator iter = arr.begin();
+  for (size_t i = 0; i < win.size(); i++) {
+    for (size_t j = 0; j < win[i].size(); j++) {
+      std::cout << win[i][j] << " ";
+      *iter = win[i][j];
+      *iter++;
     }
-    k++;
-  }
-
-  while (i < n1) {
-    arr[k] = left[i];
-    i++;
-    k++;
-  }
-
-  while (j < n2) {
-    arr[k] = right[j];
-    j++;
-    k++;
   }
 }
 
-void mergeInsertionSort(std::vector<int> &arr, int low, int high)
-{
-  if (2 <= high - low + 1) {
-    mergeInsertion(arr, low, high);
-  } 
-  else if (low < high) {
-    int mid = (low + high) / 2;
-    mergeInsertionSort(arr, low, mid);
-    mergeInsertionSort(arr, mid + 1, high);
-    mergeSort(arr, low, mid, high);
+void mergeInsertionSort(std::vector<int> &arr, int depth, int nodeSize) {
+  mergeInsertion(arr, nodeSize);
+  if (depth == 1) {
+    return ;
   }
+  mergeInsertionSort(arr, depth - 1, nodeSize / 2);
 }
 
-void mergeInsertionSort(std::deque<int> &arr, int low, int high)
-{
-  if (2 <= high - low + 1) {
-    mergeInsertion(arr, low, high);
-  } 
-  else if (low < high) {
-    int mid = (low + high) / 2;
-    mergeInsertionSort(arr, low, mid);
-    mergeInsertionSort(arr, mid + 1, high);
-    mergeSort(arr, low, mid, high);
+void mergeInsertionSort(std::deque<int> &arr, int depth, int nodeSize) {
+  mergeInsertion(arr, nodeSize);
+  if (depth <= 0) {
+    return ;
   }
+  mergeInsertionSort(arr, depth - 1, nodeSize / 2);
 }
 
 void sentenceOutput(size_t size, std::string type, double elapsed) {
