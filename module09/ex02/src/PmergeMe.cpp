@@ -18,7 +18,7 @@ int isValidData(const char *data) {
     throw std::invalid_argument("invalid value");
   }
   if (llValue < 0 || std::numeric_limits<int>::max() < llValue) {
-    throw std::overflow_error("over value");
+    throw std::overflow_error("invalid value");
   }
   return std::atoi(data);
 }
