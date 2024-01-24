@@ -8,8 +8,8 @@
 
 int isValidData(const char *data);
 
-void mergeInsertion(std::vector<int> &, int low, int hgih);
-void mergeInsertion(std::deque<int> &);
+void mergeInsertion(std::vector<int> &arr, int nodeSize);
+void mergeInsertion(std::deque<int> &arr, int nodeSize);
 
 void mergeInsertionSort(std::vector<int> &, int depth, int nodeSize);
 void mergeInsertionSort(std::deque<int> &, int depth, int nodeSize);
