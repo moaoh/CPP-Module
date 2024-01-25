@@ -279,7 +279,7 @@ void mergeInsertion(std::deque<int> &arr, int nodeSize) {
 
 void mergeInsertionSort(std::vector<int> &arr, int depth, int nodeSize) {
   mergeInsertion(arr, nodeSize);
-  if (depth == 1) {
+  if (depth <= 1) {
     return ;
   }
   mergeInsertionSort(arr, depth - 1, nodeSize / 2);
@@ -287,7 +287,7 @@ void mergeInsertionSort(std::vector<int> &arr, int depth, int nodeSize) {
 
 void mergeInsertionSort(std::deque<int> &arr, int depth, int nodeSize) {
   mergeInsertion(arr, nodeSize); 
-  if (depth == 1) {
+  if (depth <= 1) {
     return ;
   }
   mergeInsertionSort(arr, depth - 1, nodeSize / 2);
